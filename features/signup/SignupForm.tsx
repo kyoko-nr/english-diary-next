@@ -10,6 +10,7 @@ import {
   TextInputStandard,
   SimpleLink,
 } from "@/shared";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   username: yup.string().label("User name").required(),
@@ -35,6 +36,8 @@ const SignupFormComponent: FC = () => {
   const { control, handleSubmit } = useForm<IFormInput>({
     // resolver: yupResolver(schema),
   });
+
+  const router = useRouter();
 
   const onSubmit = (data: IFormInput) => {
     // dispatch(clearErrors())
@@ -96,7 +99,7 @@ const SignupFormComponent: FC = () => {
       <div className={"spacer-16"} />
       <SimpleLink
         label={"Go to sign in page"}
-        onClick={() => console.log("todo")}
+        onClick={() => router.push("/signin")}
         color={"textPrimary"}
         variant={"body2"}
       />
