@@ -1,0 +1,29 @@
+import { format } from "date-fns";
+import Typography from "@mui/material/Typography";
+import { FC, memo } from "react";
+
+type Props = {
+  date: Date;
+  format: "ym" | "date";
+  variant: "h6" | "body1" | "caption";
+  align: "left" | "center";
+};
+
+const FormatDateComponent: FC<Props> = (props) => {
+  let formated = "";
+  switch (props.format) {
+    case "ym":
+      formated = format(props.date, "MMMM yyyy");
+      break;
+    case "date":
+      formated = format(props.date, "iii dd/MM/yyyy");
+  }
+
+  return (
+    <Typography variant={props.variant} align={props.align}>
+      {formated}
+    </Typography>
+  );
+};
+
+export const FormatDate = memo(FormatDateComponent);
