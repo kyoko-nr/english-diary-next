@@ -1,5 +1,7 @@
+"use client";
+
 import { TextField, Box, Grid } from "@mui/material";
-import { IconButton } from "@/shared/components/button";
+import { RemoveIconButton } from "@/shared/components/button";
 import { Controller, Control, FieldPath } from "react-hook-form";
 import { Feature, WordForm } from "@/shared/types/types";
 import { FC, memo } from "react";
@@ -16,7 +18,7 @@ type Props = {
 
 const TextInputDeletableComponent: FC<Props> = (props) => {
   return (
-    <Grid item xs={props.fullWidth ? 12 : 3}>
+    <Grid size={props.fullWidth ? 12 : 3}>
       <Box display={"flex"}>
         <Controller<WordForm>
           name={
@@ -33,8 +35,7 @@ const TextInputDeletableComponent: FC<Props> = (props) => {
             />
           )}
         />
-        <IconButton
-          variant="remove"
+        <RemoveIconButton
           featureIndex={props.featureIndex}
           onClick={props.deleteFeature}
         />

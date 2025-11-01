@@ -57,6 +57,4 @@ const TextInputStandardComponent = <
   );
 };
 
-export const TextInputStandard = memo(
-  TextInputStandardComponent,
-) as typeof TextInputStandardComponent;
+export const TextInputStandard = memo(TextInputStandardComponent);

@@ -9,15 +9,14 @@ type Props = {
   align: "left" | "center";
 };
 
+const formatMap = {
+  ym: "MMMM yyyy",
+  date: "iii dd/MM/yyyy",
+} satisfies Record<Props["format"], string>;
+
 const FormatDateComponent: FC<Props> = (props) => {
   let formated = "";
-  switch (props.format) {
-    case "ym":
-      formated = format(props.date, "MMMM yyyy");
-      break;
-    case "date":
-      formated = format(props.date, "iii dd/MM/yyyy");
-  }
+  formated = format(props.date, formatMap[props.format]);
 
   return (
     <Typography variant={props.variant} align={props.align}>

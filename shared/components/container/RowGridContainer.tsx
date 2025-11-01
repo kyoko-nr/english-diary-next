@@ -20,7 +20,7 @@ const RowGridContainerComponent: FC<Props> = ({
       alignItems="center"
     >
       {Children.map(children, (child) => {
-        return <Grid item>{child}</Grid>;
+        return <Grid container>{child}</Grid>;
       })}
     </Grid>
   );

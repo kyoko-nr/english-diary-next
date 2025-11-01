@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { useFieldArray, Control } from "react-hook-form";
 import { TextInputDeletable } from "@/shared/components/input";
 import { Label } from "@/shared/components/label";
-import { IconButton } from "@/shared/components/button";
+import { AddIconButton } from "@/shared/components/button";
 import { Feature, WordForm } from "@/shared/types/types";
 import { FC, memo } from "react";
 
@@ -17,9 +17,7 @@ type Props = {
 const AddibleContentComponent: FC<Props> = (props) => {
   const { fields, remove, append } = useFieldArray({
     control: props.control,
-    name: `words.${props.wordIndex}.${props.feature}` as unknown as Parameters<
-      typeof useFieldArray
-    >[0]["name"],
+    name: `words.${props.wordIndex}.${props.feature}`,
   });
 
   const addFeature = () => append({ value: "" } as never);
@@ -35,11 +33,7 @@ const AddibleContentComponent: FC<Props> = (props) => {
           capitalize={true}
           bold={true}
         />
-        <IconButton
-          variant="add"
-          feature={props.feature}
-          onClick={addFeature}
-        />
+        <AddIconButton feature={props.feature} onClick={addFeature} />
       </Box>
       <Grid container spacing={1}>
         {(fields as unknown as Array<{ id: string; value?: string }>).map(
