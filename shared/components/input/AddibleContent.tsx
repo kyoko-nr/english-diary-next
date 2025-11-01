@@ -1,8 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import { useFieldArray, Control } from "react-hook-form";
-import { TextInputDeletable } from "@/shared/components/input/TextInputDeletable";
-import { Label } from "@/shared/components/label/Label";
-import { AddIconButton } from "@/shared/components/button/AddIconButton";
+import { TextInputDeletable } from "@/shared/components/input";
+import { Label } from "@/shared/components/label";
+import { IconButton } from "@/shared/components/button";
 import { Feature, WordForm } from "@/shared/types/types";
 import { FC, memo } from "react";
 
@@ -35,7 +35,11 @@ const AddibleContentComponent: FC<Props> = (props) => {
           capitalize={true}
           bold={true}
         />
-        <AddIconButton feature={props.feature} onClick={addFeature} />
+        <IconButton
+          variant="add"
+          feature={props.feature}
+          onClick={addFeature}
+        />
       </Box>
       <Grid container spacing={1}>
         {(fields as unknown as Array<{ id: string; value?: string }>).map(

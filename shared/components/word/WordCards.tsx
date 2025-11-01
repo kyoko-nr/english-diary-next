@@ -1,5 +1,5 @@
 import { Word } from "@/shared/types/types";
-import { WordCard } from "@/shared/components/word/WordCard";
+import { WordCard } from "@/shared/components/word";
 import { Stack } from "@mui/material";
 import { FC, memo } from "react";
 

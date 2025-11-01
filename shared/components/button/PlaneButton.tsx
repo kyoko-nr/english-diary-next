@@ -6,7 +6,7 @@ type Props = {
   onClick: () => void;
 };
 
-const PlaneLargeButtonComponent: FC<Props> = ({ label, onClick }) => {
+const PlaneButtonComponent: FC<Props> = ({ label, onClick }) => {
   return (
     <Button
       onClick={onClick}
@@ -31,4 +31,4 @@ const PlaneLargeButtonComponent: FC<Props> = ({ label, onClick }) => {
   );
 };
 
-export const PlaneLargeButton = memo(PlaneLargeButtonComponent);
+export const PlaneButton = memo(PlaneButtonComponent);

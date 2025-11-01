@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { FC, memo, ReactNode } from "react";
-import { ErrorPopup } from "../error/ErrorPopup";
+import { ErrorPopup } from "@/shared/components/error";
 
 type Props = {
   children: ReactNode;

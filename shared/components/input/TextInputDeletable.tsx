@@ -1,5 +1,5 @@
 import { TextField, Box, Grid } from "@mui/material";
-import { RemoveIconButton } from "@/shared/components/button/RemoveIconButton";
+import { IconButton } from "@/shared/components/button";
 import { Controller, Control, FieldPath } from "react-hook-form";
 import { Feature, WordForm } from "@/shared/types/types";
 import { FC, memo } from "react";
@@ -33,7 +33,8 @@ const TextInputDeletableComponent: FC<Props> = (props) => {
             />
           )}
         />
-        <RemoveIconButton
+        <IconButton
+          variant="remove"
           featureIndex={props.featureIndex}
           onClick={props.deleteFeature}
         />

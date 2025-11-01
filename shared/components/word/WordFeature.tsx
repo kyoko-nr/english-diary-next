@@ -1,5 +1,5 @@
 import { Typography, Stack } from "@mui/material";
-import { Label } from "@/shared/components/label/Label";
+import { Label } from "@/shared/components/label";
 import { Addible, Feature } from "@/shared/types/types";
 import { FC, memo } from "react";
 

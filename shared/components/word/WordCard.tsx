@@ -1,10 +1,8 @@
 import { Card, CardContent, Stack } from "@mui/material";
-import { Label } from "@/shared/components/label/Label";
-import { WordFeature } from "@/shared/components/word/WordFeature";
-import { Pos } from "@/shared/components/word/Pos";
-import { FormatDate } from "@/shared/components/date/FormatDate";
-import { WordFeatureSynonym } from "@/shared/components/word/WordFeatureSynonym";
-import { RowGridContainer } from "@/shared/components/container/RowGridContainer";
+import { Label } from "@/shared/components/label";
+import { WordFeature, Pos, WordFeatureSynonym } from "@/shared/components/word";
+import { FormatDate } from "@/shared/components/date";
+import { RowGridContainer } from "@/shared/components/container";
 import { Word } from "@/shared/types/types";
 import { FC, memo } from "react";
 

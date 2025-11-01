@@ -1,4 +1,4 @@
-import { WordChip } from "@/shared/components/word/WordChip";
+import { WordChip } from "@/shared/components/word";
 import { PosOptions } from "@/shared/constants/Parts";
 import { FC, memo } from "react";
 

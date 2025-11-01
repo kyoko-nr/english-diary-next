@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
-import { Label } from "@/shared/components/label/Label";
-import { RowGridContainer } from "@/shared/components/container/RowGridContainer";
+import { Label } from "@/shared/components/label";
+import { RowGridContainer } from "@/shared/components/container";
 import { Addible, Feature } from "@/shared/types/types";
 import { FC, memo } from "react";
 
