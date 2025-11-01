@@ -1,26 +1,135 @@
-/* @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Base (from index.scss) */
+body {
+  margin: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Spacers (from modules/_spacing.scss) */
+.spacer-8 {
+  height: 8px;
+  width: 100%;
+}
+.spacer-16 {
+  height: 16px;
+  width: 100%;
+}
+.spacer-24 {
+  height: 24px;
+  width: 100%;
+}
+.spacer-32 {
+  height: 32px;
+  width: 100%;
+}
+.spacer-40 {
+  height: 40px;
+  width: 100%;
+}
+.spacer-64 {
+  height: 64px;
+  width: 100%;
+}
+
+/* Base and utilities (from breakpoints/_base.scss) */
+body {
+  font-size: 14px;
+}
+
+/* Original styles targeted body #root; Next.js doesn't use #root. */
+/* Keep original selectors for reference and add flattened equivalents. */
+body #root {
+  color: #4a4a4a;
+}
+
+body #root .MuiButton-containedSecondary,
+body #root .grey-text {
+  color: #4a4a4a;
+}
+
+/* Flattened equivalents */
+.MuiButton-containedSecondary,
+.grey-text {
+  color: #4a4a4a;
+}
+
+body #root .main-logo {
+  color: #4a4a4a;
+  font-family: Pacifico, cursive;
+}
+
+/* Flattened equivalent */
+.main-logo {
+  color: #4a4a4a;
+  font-family: Pacifico, cursive;
+}
+
+.content {
+  padding: 96px 8px 40px 8px;
+}
+
+.full-window {
+  height: 100vh;
+  min-height: 600px;
+  width: 100vw;
+  display: flex;
+}
+
+.bg-yellow {
+  background-color: #ffdb46;
+}
+
+.synonyms .each {
+  position: relative;
+}
+
+.synonyms .each:not(:last-child)::before {
+  content: "/";
+  position: absolute;
+  right: -8px;
+  padding: 4px;
+}
+
+.sweet-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.1);
+  position: fixed;
+  transition: opacity 0.3s ease;
+}
+
+.sweet-loading.inactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Breakpoints (from _max959.scss, _max599.scss) */
+@media (max-width: 959px) {
+  #canvas-container > .canvas {
+    height: 120px;
+    width: 100%;
+  }
+  h4.MuiTypography-h4 {
+    font-size: 1.6rem;
+  }
+  .archivelist-container {
+    padding: 0 8px;
+    margin-top: 60px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+@media (max-width: 599px) {
+  .content {
+    padding-top: 84px;
+  }
+}
