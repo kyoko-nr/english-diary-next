@@ -12,28 +12,35 @@ type Props = {
   overflowElipses?: boolean;
 };
 
-const LabelComponent: FC<Props> = (props) => {
-  return (
-    <Typography
-      variant={props.variant}
-      align={props.align}
-      color={props.color ? props.color : "text"}
-      sx={{
-        display: "block",
-        textTransform: props.uppercase
-          ? "uppercase"
-          : props.capitalize
-            ? "capitalize"
-            : "none",
-      }}
-      fontWeight={props.bold ? "500" : "400"}
-      textOverflow={props.overflowElipses ? "ellipsis" : "none"}
-      overflow={props.overflowElipses ? "hidden" : "auto"}
-      whiteSpace={props.overflowElipses ? "nowrap" : "normal"}
-    >
-      {props.label}
-    </Typography>
-  );
-};
+const LabelComponent: FC<Props> = ({
+  label,
+  variant,
+  align,
+  color,
+  uppercase,
+  capitalize,
+  bold,
+  overflowElipses,
+}) => (
+  <Typography
+    variant={variant}
+    align={align}
+    color={color ? color : "text"}
+    sx={{
+      display: "block",
+      textTransform: uppercase
+        ? "uppercase"
+        : capitalize
+          ? "capitalize"
+          : "none",
+    }}
+    fontWeight={bold ? "500" : "400"}
+    textOverflow={overflowElipses ? "ellipsis" : "none"}
+    overflow={overflowElipses ? "hidden" : "auto"}
+    whiteSpace={overflowElipses ? "nowrap" : "normal"}
+  >
+    {label}
+  </Typography>
+);
 
 export const Label = memo(LabelComponent);

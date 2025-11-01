@@ -5,18 +5,16 @@ type Props = {
   children: ReactNode;
 };
 
-const XsColumnGridContainerComponent: FC<Props> = (props) => {
-  return (
-    <Container maxWidth="xs">
-      <Grid container spacing={1}>
-        <Grid size={12}>
-          {Children.map(props.children, (child) => {
-            return child;
-          })}
-        </Grid>
+const XsColumnGridContainerComponent: FC<Props> = ({ children }) => (
+  <Container maxWidth="xs">
+    <Grid container spacing={1}>
+      <Grid size={12}>
+        {Children.map(children, (child) => {
+          return child;
+        })}
       </Grid>
-    </Container>
-  );
-};
+    </Grid>
+  </Container>
+);
 
 export const XsColumnGridContainer = memo(XsColumnGridContainerComponent);

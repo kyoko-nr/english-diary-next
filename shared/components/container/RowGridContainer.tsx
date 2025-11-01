@@ -11,19 +11,17 @@ const RowGridContainerComponent: FC<Props> = ({
   children,
   spacing,
   justifyContent,
-}) => {
-  return (
-    <Grid
-      container
-      spacing={spacing}
-      justifyContent={justifyContent}
-      alignItems="center"
-    >
-      {Children.map(children, (child) => {
-        return <Grid container>{child}</Grid>;
-      })}
-    </Grid>
-  );
-};
+}) => (
+  <Grid
+    container
+    spacing={spacing}
+    justifyContent={justifyContent}
+    alignItems="center"
+  >
+    {Children.map(children, (child) => {
+      return <Grid container>{child}</Grid>;
+    })}
+  </Grid>
+);
 
 export const RowGridContainer = memo(RowGridContainerComponent);

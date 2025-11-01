@@ -10,26 +10,31 @@ type Props = {
   disabled?: boolean;
 };
 
-const SimpleLinkComponent: FC<Props> = (props) => {
-  return (
-    <Link
-      component="button"
-      onClick={props.onClick}
-      color={props.color}
-      variant={props.variant}
-      sx={{
-        textTransform: props.upperCase ? "uppercase" : "none",
-        textUnderlineOffset: "2px",
-        textDecoration: props.disabled ? "none" : "",
-        opacity: props.disabled ? 0.5 : 1,
-        cursor: props.disabled ? "initial" : "pointer",
-        minWidth: "20px",
-      }}
-      disabled={props.disabled}
-    >
-      {props.label}
-    </Link>
-  );
-};
+const SimpleLinkComponent: FC<Props> = ({
+  label,
+  onClick,
+  color,
+  upperCase,
+  variant,
+  disabled,
+}) => (
+  <Link
+    component="button"
+    onClick={onClick}
+    color={color}
+    variant={variant}
+    sx={{
+      textTransform: upperCase ? "uppercase" : "none",
+      textUnderlineOffset: "2px",
+      textDecoration: disabled ? "none" : "",
+      opacity: disabled ? 0.5 : 1,
+      cursor: disabled ? "initial" : "pointer",
+      minWidth: "20px",
+    }}
+    disabled={disabled}
+  >
+    {label}
+  </Link>
+);
 
 export const SimpleLink = memo(SimpleLinkComponent);

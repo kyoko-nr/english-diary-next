@@ -9,12 +9,10 @@ type Props = {
   nextYM: Date;
 };
 
-const ArrowIconButtonComponent: FC<Props> = ({ type, onClick, nextYM }) => {
-  return (
-    <IconButton onClick={() => onClick(nextYM)} color={"primary"}>
-      {type === "forward" ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
-    </IconButton>
-  );
-};
+const ArrowIconButtonComponent: FC<Props> = ({ type, onClick, nextYM }) => (
+  <IconButton onClick={() => onClick(nextYM)} color={"primary"}>
+    {type === "forward" ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
+  </IconButton>
+);
 
 export const ArrowIconButton = memo(ArrowIconButtonComponent);

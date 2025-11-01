@@ -5,18 +5,16 @@ import { FC, memo } from "react";
 
 type Props = {
   words: Word[];
-  withDate?: boolean;
+  hasDate?: boolean;
 };
 
-const WordCardsComponent: FC<Props> = ({ words, withDate }) => {
-  return (
-    <Stack direction="column" spacing={2}>
-      {words &&
-        words.map((word) => (
-          <WordCard word={word} key={word.title} widhDate={withDate} />
-        ))}
-    </Stack>
-  );
-};
+const WordCardsComponent: FC<Props> = ({ words, hasDate }) => (
+  <Stack direction="column" spacing={2}>
+    {words &&
+      words.map((word) => (
+        <WordCard word={word} key={word.title} hasDate={hasDate} />
+      ))}
+  </Stack>
+);
 
 export const WordCards = memo(WordCardsComponent);

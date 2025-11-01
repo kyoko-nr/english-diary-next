@@ -4,7 +4,7 @@ import { FC, memo } from "react";
 
 type Props = {
   date: Date;
-  format: "ym" | "date";
+  formatType: "ym" | "date";
   variant: "h6" | "body1" | "caption";
   align: "left" | "center";
 };
@@ -12,14 +12,18 @@ type Props = {
 const formatMap = {
   ym: "MMMM yyyy",
   date: "iii dd/MM/yyyy",
-} satisfies Record<Props["format"], string>;
+} satisfies Record<Props["formatType"], string>;
 
-const FormatDateComponent: FC<Props> = (props) => {
-  let formated = "";
-  formated = format(props.date, formatMap[props.format]);
+const FormatDateComponent: FC<Props> = ({
+  date,
+  formatType,
+  variant,
+  align,
+}) => {
+  const formated = format(date, formatMap[formatType]);
 
   return (
-    <Typography variant={props.variant} align={props.align}>
+    <Typography variant={variant} align={align}>
       {formated}
     </Typography>
   );

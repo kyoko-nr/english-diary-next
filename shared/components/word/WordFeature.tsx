@@ -8,29 +8,27 @@ type Props = {
   featureName: Feature;
 };
 
-const WordFeatureComponent: FC<Props> = ({ feature, featureName }) => {
-  return (
-    <div>
-      <Label
-        label={featureName}
-        variant="body1"
-        align="left"
-        capitalize={true}
-        bold={true}
-      />
-      <Stack spacing={1}>
-        {feature.map((fe, idx) => (
-          <Typography
-            key={`${featureName}-${idx}`}
-            variant="body1"
-            sx={{ textIndent: "8px", lineHeight: "1.2" }}
-          >
-            {fe.value}
-          </Typography>
-        ))}
-      </Stack>
-    </div>
-  );
-};
+const WordFeatureComponent: FC<Props> = ({ feature, featureName }) => (
+  <div>
+    <Label
+      label={featureName}
+      variant="body1"
+      align="left"
+      capitalize={true}
+      bold={true}
+    />
+    <Stack spacing={1}>
+      {feature.map((fe, idx) => (
+        <Typography
+          key={`${featureName}-${idx}`}
+          variant="body1"
+          sx={{ textIndent: "8px", lineHeight: "1.2" }}
+        >
+          {fe.value}
+        </Typography>
+      ))}
+    </Stack>
+  </div>
+);
 
 export const WordFeature = memo(WordFeatureComponent);

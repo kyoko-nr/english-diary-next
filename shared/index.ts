@@ -21,7 +21,6 @@ export {
   TextInputStandard,
   TextInputOutlined,
   TextInputDeletable,
-  AddibleContent,
   PosSelect,
   WordTitleInput,
 } from "./components/input";

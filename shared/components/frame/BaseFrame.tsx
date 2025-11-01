@@ -6,19 +6,17 @@ type Props = {
   children: ReactNode;
 };
 
-const BaseFrameComponent: FC<Props> = ({ children }) => {
-  return (
-    <Box
-      className={"full-window bg-yellow"}
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <ErrorPopup />
-      {children}
-    </Box>
-  );
-};
+const BaseFrameComponent: FC<Props> = ({ children }) => (
+  <Box
+    className={"full-window bg-yellow"}
+    display="flex"
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <ErrorPopup />
+    {children}
+  </Box>
+);
 
 export const BaseFrame = memo(BaseFrameComponent);

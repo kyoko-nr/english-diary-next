@@ -8,18 +8,16 @@ type Props = {
   isLink?: boolean;
 };
 
-const LogoComponent: FC<Props> = (props) => {
-  return (
-    <Typography
-      className="main-logo"
-      variant={props.variant}
-      component={props.component}
-      onClick={props.onClick}
-      sx={{ cursor: props.isLink ? "pointer" : "default" }}
-    >
-      English Diary
-    </Typography>
-  );
-};
+const LogoComponent: FC<Props> = ({ variant, component, onClick, isLink }) => (
+  <Typography
+    className="main-logo"
+    variant={variant}
+    component={component}
+    onClick={onClick}
+    sx={{ cursor: isLink ? "pointer" : "default" }}
+  >
+    English Diary
+  </Typography>
+);
 
 export const Logo = memo(LogoComponent);

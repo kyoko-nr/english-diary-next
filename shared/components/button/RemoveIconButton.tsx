@@ -7,16 +7,14 @@ type Props = {
   onClick: (featureIndex: number) => void;
 };
 
-const RemoveIconButtonComponent: FC<Props> = ({ featureIndex, onClick }) => {
-  return (
-    <IconButton
-      onClick={() => onClick(featureIndex)}
-      color={"error"}
-      size="small"
-    >
-      <RemoveCircleOutlineIcon />
-    </IconButton>
-  );
-};
+const RemoveIconButtonComponent: FC<Props> = ({ featureIndex, onClick }) => (
+  <IconButton
+    onClick={() => onClick(featureIndex)}
+    color={"error"}
+    size="small"
+  >
+    <RemoveCircleOutlineIcon />
+  </IconButton>
+);
 
 export const RemoveIconButton = memo(RemoveIconButtonComponent);

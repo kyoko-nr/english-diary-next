@@ -9,35 +9,29 @@ type Props = {
   featureName: Feature;
 };
 
-const WordFeatureSynonymComponent: FC<Props> = ({ feature, featureName }) => {
-  return (
-    <div>
-      <Label
-        label={featureName}
-        variant="body1"
-        align="left"
-        capitalize={true}
-        bold={true}
-      />
-      <RowGridContainer spacing={1} justifyContent="flex-start">
-        {feature.map((fe, index) => (
-          <Box
-            key={`${featureName}-${index}`}
-            display="flex"
-            alignItems="center"
+const WordFeatureSynonymComponent: FC<Props> = ({ feature, featureName }) => (
+  <div>
+    <Label
+      label={featureName}
+      variant="body1"
+      align="left"
+      capitalize={true}
+      bold={true}
+    />
+    <RowGridContainer spacing={1} justifyContent="flex-start">
+      {feature.map((fe, index) => (
+        <Box key={`${featureName}-${index}`} display="flex" alignItems="center">
+          <Typography
+            variant="body1"
+            sx={{ marginRight: "8px", textIndent: "8px" }}
           >
-            <Typography
-              variant="body1"
-              sx={{ marginRight: "8px", textIndent: "8px" }}
-            >
-              {fe.value}
-            </Typography>
-            {index !== feature.length - 1 && <span>/</span>}
-          </Box>
-        ))}
-      </RowGridContainer>
-    </div>
-  );
-};
+            {fe.value}
+          </Typography>
+          {index !== feature.length - 1 && <span>/</span>}
+        </Box>
+      ))}
+    </RowGridContainer>
+  </div>
+);
 
 export const WordFeatureSynonym = memo(WordFeatureSynonymComponent);

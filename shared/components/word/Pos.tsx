@@ -8,7 +8,10 @@ type Props = {
 
 const PosComponent: FC<Props> = ({ pos }) => {
   const part = PosOptions.filter((p) => p.key === pos);
-  return <>{part && part.length > 0 && <WordChip label={part[0].value} />}</>;
+  if (!part || part.length === 0) {
+    return null;
+  }
+  return <WordChip label={part[0].value} />;
 };
 
 export const Pos = memo(PosComponent);

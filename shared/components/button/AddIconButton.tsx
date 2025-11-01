@@ -8,12 +8,10 @@ type Props = {
   onClick: (feature: Feature) => void;
 };
 
-const AddIconButtonComponent: FC<Props> = ({ feature, onClick }) => {
-  return (
-    <IconButton onClick={() => onClick(feature)} color={"primary"} size="small">
-      <AddCircleOutlineIcon />
-    </IconButton>
-  );
-};
+const AddIconButtonComponent: FC<Props> = ({ feature, onClick }) => (
+  <IconButton onClick={() => onClick(feature)} color={"primary"} size="small">
+    <AddCircleOutlineIcon />
+  </IconButton>
+);
 
 export const AddIconButton = memo(AddIconButtonComponent);

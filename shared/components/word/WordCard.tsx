@@ -8,42 +8,35 @@ import { FC, memo } from "react";
 
 type Props = {
   word: Word;
-  widhDate?: boolean;
+  hasDate?: boolean;
 };
 
-const WordCardComponent: FC<Props> = (props) => {
+const WordCardComponent: FC<Props> = ({ word, hasDate }) => {
+  const { title, pos, createdAt, meanings, synonyms, examples } = word;
   return (
     <Card variant="outlined" sx={{ width: "100%" }}>
       <CardContent>
         <Stack spacing={1} direction="column">
           <RowGridContainer spacing={1} justifyContent="flex-start">
-            <Label
-              label={props.word.title}
-              variant="h6"
-              align="left"
-              color="primary"
-            />
-            <Pos pos={props.word.pos} />
-            {props.widhDate && (
+            <Label label={title} variant="h6" align="left" color="primary" />
+            <Pos pos={pos} />
+            {hasDate && (
               <FormatDate
-                date={props.word.createdAt}
-                format="date"
+                date={createdAt}
+                formatType="date"
                 variant="body1"
                 align="left"
               />
             )}
           </RowGridContainer>
-          {props.word.meanings.length > 0 && (
-            <WordFeature feature={props.word.meanings} featureName="meanings" />
+          {meanings.length > 0 && (
+            <WordFeature feature={meanings} featureName="meanings" />
           )}
-          {props.word.synonyms.length > 0 && (
-            <WordFeatureSynonym
-              feature={props.word.synonyms}
-              featureName="synonyms"
-            />
+          {synonyms.length > 0 && (
+            <WordFeatureSynonym feature={synonyms} featureName="synonyms" />
           )}
-          {props.word.examples.length > 0 && (
-            <WordFeature feature={props.word.examples} featureName="examples" />
+          {examples.length > 0 && (
+            <WordFeature feature={examples} featureName="examples" />
           )}
         </Stack>
       </CardContent>

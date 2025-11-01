@@ -16,23 +16,23 @@ const ErrorPopupComponent: FC = () => {
   const msgs: string[] = [];
   const open = msgs.length > 0;
 
+  if (!open) {
+    return null;
+  }
+
   return (
-    <>
-      {msgs && (
-        <Snackbar
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          open={open}
-        >
-          <div>
-            {msgs.map((msg: string, idx: number) => (
-              <Alert severity="error" key={idx} sx={{ marginBottom: "8px" }}>
-                {msg}
-              </Alert>
-            ))}
-          </div>
-        </Snackbar>
-      )}
-    </>
+    <Snackbar
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      open={open}
+    >
+      <div>
+        {msgs.map((msg: string, idx: number) => (
+          <Alert severity="error" key={idx} sx={{ marginBottom: "8px" }}>
+            {msg}
+          </Alert>
+        ))}
+      </div>
+    </Snackbar>
   );
 };
 

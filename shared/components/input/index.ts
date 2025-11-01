@@ -1,4 +1,3 @@
-export { AddibleContent } from "./AddibleContent";
 export { PosSelect } from "./PosSelect";
 export { TextInputDeletable } from "./TextInputDeletable";
 export { TextInputOutlined } from "./TextInputOutlined";
