@@ -1,5 +1,5 @@
 import { WordChip } from "@/shared/components/word";
-import { PosOptions } from "@/shared/constants/Parts";
+import { PosIndexes } from "@/shared/constants/Parts";
 import { FC, memo } from "react";
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 };
 
 const PosComponent: FC<Props> = ({ pos }) => {
-  const part = PosOptions.filter((p) => p.key === pos);
+  const part = PosIndexes.filter((p) => p.key === pos);
   if (!part || part.length === 0) {
     return null;
   }

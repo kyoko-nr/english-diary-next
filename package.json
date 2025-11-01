@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "fix": "pnpm run _lint && pnpm run _format",
+    "fix": "pnpm run _lint && pnpm run _format && pnpm run _type",
     "_lint": "eslint --fix .",
-    "_format": "prettier --write ."
+    "_format": "prettier --write .",
+    "_type": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

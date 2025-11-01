@@ -1,6 +1,6 @@
 import { TextField, FormControl, MenuItem } from "@mui/material";
 import { Control, useController, FieldValues, Path } from "react-hook-form";
-import { PosOptions } from "@/shared/constants/Parts";
+import { PosIndexes } from "@/shared/constants/Parts";
 import { memo } from "react";
 
 type Props<T extends FieldValues> = {
@@ -25,7 +25,7 @@ const PosSelectComponent = <T extends FieldValues>({
         variant="standard"
         select
       >
-        {PosOptions.map((p) => (
+        {PosIndexes.map((p) => (
           <MenuItem value={p.key} key={p.key}>
             {p.value}
           </MenuItem>

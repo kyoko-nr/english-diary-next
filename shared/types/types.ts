@@ -22,15 +22,17 @@ export type Addible = {
 
 export type Feature = "meanings" | "examples" | "synonyms";
 
-export type Option = {
-  key: string;
-  value: string;
+export type Option<K, V> = {
+  key: K;
+  value: V;
 };
+
+export type SortKey = "alp" | "pos" | "new" | "old";
 
 export type SortType = "Alphabetical" | "Parts of speech" | "Newer" | "Older";
 
 export type SortOption = {
-  key: string;
+  key: SortKey;
   value: SortType;
 };
 
