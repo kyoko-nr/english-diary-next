@@ -2,46 +2,41 @@
 
 import { TextField, Box, Grid } from "@mui/material";
 import { RemoveIconButton } from "@/shared/components/button";
-import { Controller, Control, FieldPath } from "react-hook-form";
-import { Feature, WordForm } from "@/shared/types/types";
-import { FC, memo } from "react";
+import { Control, FieldValues, Path, useController } from "react-hook-form";
+import { memo } from "react";
 
-type Props = {
-  feature: Feature;
-  control: Control<WordForm>;
+type Props<T extends FieldValues> = {
+  name: Path<T>;
+  control: Control<T>;
   fullWidth: boolean;
   deleteFeature: (featureIndex: number) => void;
-  wordIndex: number;
   featureIndex: number;
-  defaultValue: string | undefined;
 };
 
-const TextInputDeletableComponent: FC<Props> = (props) => {
+const TextInputDeletableComponent = <T extends FieldValues>({
+  name,
+  control,
+  fullWidth,
+  deleteFeature,
+  featureIndex,
+}: Props<T>) => {
+  const { field } = useController({ name, control });
+
   return (
-    <Grid size={props.fullWidth ? 12 : 3}>
+    <Grid size={fullWidth ? 12 : 3}>
       <Box display={"flex"}>
-        <Controller<WordForm>
-          name={
-            `words.${props.wordIndex}.${props.feature}.${props.featureIndex}.value` as unknown as FieldPath<WordForm>
-          }
-          control={props.control}
-          defaultValue={props.defaultValue}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              variant="standard"
-              required={false}
-              fullWidth={props.fullWidth}
-            />
-          )}
+        <TextField
+          {...field}
+          variant="standard"
+          required={false}
+          fullWidth={fullWidth}
         />
-        <RemoveIconButton
-          featureIndex={props.featureIndex}
-          onClick={props.deleteFeature}
-        />
+        <RemoveIconButton featureIndex={featureIndex} onClick={deleteFeature} />
       </Box>
     </Grid>
   );
 };
 
-export const TextInputDeletable = memo(TextInputDeletableComponent);
+export const TextInputDeletable = memo(
+  TextInputDeletableComponent,
+) as typeof TextInputDeletableComponent;

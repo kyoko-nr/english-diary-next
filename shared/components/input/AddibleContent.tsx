@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import { useFieldArray, Control } from "react-hook-form";
+import { useFieldArray, Control, Path } from "react-hook-form";
 import { TextInputDeletable } from "@/shared/components/input";
 import { Label } from "@/shared/components/label";
 import { AddIconButton } from "@/shared/components/button";
@@ -20,7 +20,7 @@ const AddibleContentComponent: FC<Props> = (props) => {
     name: `words.${props.wordIndex}.${props.feature}`,
   });
 
-  const addFeature = () => append({ value: "" } as never);
+  const addFeature = () => append({ value: "" });
   const deleteFeature = (featureIndex: number) => remove(featureIndex);
 
   return (
@@ -36,20 +36,16 @@ const AddibleContentComponent: FC<Props> = (props) => {
         <AddIconButton feature={props.feature} onClick={addFeature} />
       </Box>
       <Grid container spacing={1}>
-        {(fields as unknown as Array<{ id: string; value?: string }>).map(
-          (field, index) => (
-            <TextInputDeletable
-              feature={props.feature}
-              fullWidth={props.fullWidth}
-              deleteFeature={deleteFeature}
-              key={field.id}
-              control={props.control}
-              featureIndex={index}
-              wordIndex={props.wordIndex}
-              defaultValue={field.value}
-            />
-          ),
-        )}
+        {fields.map((field, index) => (
+          <TextInputDeletable
+            key={field.id}
+            name={`words.${props.wordIndex}.${props.feature}.${index}.value`}
+            control={props.control}
+            fullWidth={props.fullWidth}
+            deleteFeature={deleteFeature}
+            featureIndex={index}
+          />
+        ))}
       </Grid>
     </>
   );

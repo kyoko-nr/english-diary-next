@@ -1,56 +1,52 @@
-import { TextField } from "@mui/material";
-import {
-  Controller,
-  FieldValues,
-  useController,
-  FieldPath,
-  Control,
-} from "react-hook-form";
+"use client";
 
-export type TextInputOutlinedProps<
-  TFieldValues extends FieldValues = FieldValues,
-> = {
-  name: FieldPath<TFieldValues>;
-  required: boolean;
-  defaultValue: unknown;
-  control?: Control<TFieldValues>;
-  fullWidth: boolean;
-  label: string;
-  multiline: boolean;
-  rows: number;
-  type: "text" | "email" | "password";
+import { TextField } from "@mui/material";
+import { memo } from "react";
+import { Control, FieldValues, Path, useController } from "react-hook-form";
+
+type Props<T extends FieldValues> = {
+  name: Path<T>;
+  control: Control<T>;
+  required?: boolean;
+  fullWidth?: boolean;
+  label?: string;
+  multiline?: boolean;
+  rows?: number;
+  type?: "text" | "email" | "password";
 };
 
-export function TextInputOutlined<
-  TFieldValues extends FieldValues = FieldValues,
->(props: TextInputOutlinedProps<TFieldValues>): JSX.Element {
-  const { fieldState } = useController<TFieldValues>(props);
-  const message = props.required
-    ? fieldState.error
-      ? fieldState.error.message
-      : " "
-    : "";
+const TextInputOutlinedComponent = <T extends FieldValues>({
+  name,
+  control,
+  required = false,
+  fullWidth = true,
+  label,
+  multiline = false,
+  rows = 0,
+  type = "text",
+}: Props<T>) => {
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({ name, control, rules: { required } });
 
   return (
-    <Controller<TFieldValues>
-      name={props.name}
-      control={props.control}
-      defaultValue={props.defaultValue}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          variant={"outlined"}
-          helperText={message}
-          fullWidth={props.fullWidth}
-          error={fieldState.invalid}
-          label={props.label}
-          multiline={props.multiline}
-          rows={props.rows}
-          required={props.required}
-          type={props.type}
-          sx={{ borderRadius: 8, lineHeight: "1.4em" }}
-        />
-      )}
+    <TextField
+      {...field}
+      variant={"outlined"}
+      helperText={error?.message}
+      fullWidth={fullWidth}
+      error={invalid}
+      label={label}
+      multiline={multiline}
+      rows={rows}
+      required={required}
+      type={type}
+      sx={{ borderRadius: 8, lineHeight: "1.4em" }}
     />
   );
-}
+};
+
+export const TextInputOutlined = memo(
+  TextInputOutlinedComponent,
+) as typeof TextInputOutlinedComponent;

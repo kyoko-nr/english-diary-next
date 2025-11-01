@@ -1,14 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, FieldValues } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
 import {
-  PlaneLargeButton,
+  PlaneButton,
   Label,
   XsColumnGridContainer,
   TextInputStandard,
   SimpleLink,
+  BaseFrame,
 } from "@/shared";
 import { useRouter } from "next/navigation";
 
@@ -24,7 +25,7 @@ const schema = yup.object().shape({
     .min(6),
 });
 
-interface IFormInput {
+interface FormType {
   username: string;
   email: string;
   password: string;
@@ -33,13 +34,20 @@ interface IFormInput {
 
 const SignupFormComponent: FC = () => {
   //   const dispatch = useDispatch()
-  const { control, handleSubmit } = useForm<IFormInput>({
+  const methods = useForm<FormType>({
     // resolver: yupResolver(schema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+    },
   });
+  const { control } = methods;
 
   const router = useRouter();
 
-  const onSubmit = (data: IFormInput) => {
+  const onSubmit = (data: FormType) => {
     // dispatch(clearErrors())
     // dispatch(changeLoadingState(true))
     // dispatch(
@@ -53,7 +61,7 @@ const SignupFormComponent: FC = () => {
   };
 
   return (
-    <>
+    <BaseFrame>
       <Label
         label={"Sign up for your English Diary!"}
         variant={"h4"}
@@ -62,40 +70,36 @@ const SignupFormComponent: FC = () => {
       <div className={"spacer-40"} />
       <XsColumnGridContainer>
         <TextInputStandard
+          name="username"
           control={control}
-          name={"username"}
-          defaultValue={""}
           label={"User name"}
           type={"text"}
-          required={true}
+          required
         />
         <TextInputStandard
+          name="email"
           control={control}
-          name={"email"}
-          defaultValue={""}
           label={"Email"}
           type={"email"}
-          required={true}
+          required
         />
         <TextInputStandard
+          name="password"
           control={control}
-          name={"password"}
-          defaultValue={""}
           label={"Password"}
           type={"password"}
-          required={true}
+          required
         />
         <TextInputStandard
+          name="passwordConfirm"
           control={control}
-          name={"passwordConfirm"}
-          defaultValue={""}
           label={"Password to confirm"}
           type={"password"}
-          required={true}
+          required
         />
       </XsColumnGridContainer>
       <div className={"spacer-32"} />
-      <PlaneLargeButton label={"sign up"} onClick={handleSubmit(onSubmit)} />
+      <PlaneButton label={"sign up"} onClick={methods.handleSubmit(onSubmit)} />
       <div className={"spacer-16"} />
       <SimpleLink
         label={"Go to sign in page"}
@@ -103,7 +107,7 @@ const SignupFormComponent: FC = () => {
         color={"textPrimary"}
         variant={"body2"}
       />
-    </>
+    </BaseFrame>
   );
 };
 

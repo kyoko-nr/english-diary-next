@@ -1,60 +1,45 @@
-"use client";
-
 import { TextField } from "@mui/material";
 import { memo } from "react";
-import {
-  Controller,
-  FieldValues,
-  useController,
-  Control,
-  FieldPath,
-  FieldPathValue,
-} from "react-hook-form";
+import { Control, FieldValues, Path, useController } from "react-hook-form";
 
-type Props<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
-  name: TName;
-  required: boolean;
-  defaultValue?: FieldPathValue<TFieldValues, TName>;
-  control?: Control<TFieldValues>;
-  label: string;
-  type: "text" | "email" | "password";
+type Props<T extends FieldValues> = {
+  required?: boolean;
+  label?: string;
+  type?: string;
+  name: Path<T>;
+  control: Control<T>;
 };
 
-const TextInputStandardComponent = <
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->(
-  props: Props<TFieldValues, TName>,
-) => {
-  const { fieldState } = useController<TFieldValues, TName>(props);
-  const message = props.required
-    ? fieldState.error
-      ? fieldState.error.message
-      : " "
-    : "";
+const TextInputStandardComponent = <T extends FieldValues>({
+  required,
+  label,
+  type,
+  name,
+  control,
+}: Props<T>) => {
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({
+    name,
+    control,
+    rules: { required },
+  });
 
   return (
-    <Controller<TFieldValues, TName>
-      name={props.name}
-      control={props.control}
-      defaultValue={props.defaultValue}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          variant={"standard"}
-          helperText={message}
-          fullWidth={true}
-          error={fieldState.invalid}
-          label={props.label}
-          required={props.required}
-          type={props.type}
-        />
-      )}
+    <TextField
+      {...field}
+      variant={"standard"}
+      helperText={error?.message}
+      fullWidth={true}
+      error={invalid}
+      label={label}
+      required={required}
+      type={type}
     />
   );
 };
 
-export const TextInputStandard = memo(TextInputStandardComponent);
+export const TextInputStandard = memo(
+  TextInputStandardComponent,
+) as typeof TextInputStandardComponent;
