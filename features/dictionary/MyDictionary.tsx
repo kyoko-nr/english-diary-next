@@ -1,7 +1,8 @@
 "use client";
 import { FC, memo } from "react";
 import { BaseFrame } from "@/shared";
-import { MyDictContent, SortSelection } from "@/features";
+import { MyDictContent } from "./MyDictContent";
+import { SortSelection } from "./SortSelection";
 
 const MyDictionaryComponent: FC = () => (
   <BaseFrame>

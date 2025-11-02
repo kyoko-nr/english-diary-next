@@ -1,6 +1,6 @@
 "use client";
 import { FC, memo } from "react";
-import { DictIndex } from "@/features";
+import { DictIndex } from "./DictIndex";
 import { WordCards } from "@/shared";
 import { useAtomValue } from "jotai";
 import { currentWordsAtom } from "./states/currentWordsState";

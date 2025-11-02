@@ -1,7 +1,7 @@
 import { loadable } from "jotai/utils";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
-import { currentDiaryAtom } from "../states/diaryState";
+import { currentDiaryAtom } from "../../../shared/state/diaryState";
 import { useAtomValue } from "jotai";
 import { useFieldArray, useForm } from "react-hook-form";
 import { WordForm } from "@/shared/types/types";
