@@ -2,12 +2,13 @@
 import { FC, memo } from "react";
 import { BaseFrame, Logo } from "@/shared";
 import { SigninForm } from "./SigninForm";
+import { Scene } from "./three/Scene";
 
 const SigninComponent: FC = () => {
   return (
     <BaseFrame>
       <Logo variant={"h4"} component={"h1"} />
-      {/* <Scene /> */}
+      <Scene />
       <SigninForm />
     </BaseFrame>
   );

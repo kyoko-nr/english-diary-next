@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "English Diary",
   description: "Simple english diary app",
   icons: {
-    icon: "/facivon.ico",
+    icon: "/favicon.ico",
   },
 };
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Box } from "@mui/material";
 import { FC, memo, ReactNode } from "react";
 import { ErrorPopup } from "@/shared/components/error";
