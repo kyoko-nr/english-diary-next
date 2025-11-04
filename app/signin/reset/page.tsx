@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { ResetForm } from "@/features/signin/ResetForm";
+import { ResetForm } from "@/features";
 
 const ResetPage: FC = () => {
   return <ResetForm />;

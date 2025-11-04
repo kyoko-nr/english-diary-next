@@ -1,7 +1,7 @@
 "use client";
 import { FC, memo } from "react";
 import { BaseFrame, Logo } from "@/shared";
-import { SigninForm } from "@/features/signin/SigninForm";
+import { SigninForm } from "./SigninForm";
 
 const SigninComponent: FC = () => {
   return (

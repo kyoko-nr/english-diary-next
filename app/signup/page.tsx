@@ -1,6 +1,6 @@
 "use client";
 
-import { SignupForm } from "@/features/signup/SignupForm";
+import { SignupForm } from "@/features";
 import { FC } from "react";
 
 const Signup: FC = () => {

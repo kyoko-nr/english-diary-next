@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { Signin } from "@/features/signin/Signin";
+import { Signin } from "@/features";
 
 const SigninPage: FC = () => {
   return <Signin />;

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { EmailSend } from "@/features/signin/EmailSend";
+import { EmailSend } from "@/features";
 
 const EmailSendPage: FC = () => {
   return <EmailSend />;
