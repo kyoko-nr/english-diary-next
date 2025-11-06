@@ -43,9 +43,9 @@ const SigninFormComponent: FC = () => {
     try {
       await signIn(data.email, data.password);
       router.push("/edit");
-    } catch (e: any) {
+    } catch (e) {
       // TODO: toastにする
-      switch (e?.code) {
+      switch ((e as { code: string }).code) {
         case "auth/invalid-email":
         case "auth/wrong-password":
           setError("EmailまたはPasswordが正しくありません");

@@ -71,9 +71,9 @@ const SignupFormComponent: FC = () => {
         updatedAt: ts,
       });
       router.push("/signin");
-    } catch (e: any) {
+    } catch (e) {
       // TODO: toastにする
-      switch (e?.code) {
+      switch ((e as { code: string }).code) {
         case "auth/email-already-in-use":
           setError("このメールアドレスは既に使用されています");
           break;
