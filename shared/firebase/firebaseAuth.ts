@@ -24,16 +24,16 @@ export const signUp = (email: string, password: string) =>
 
 export const signOutFrom = () => signOut(auth);
 
-export const onAuthChange = (
-  cb: (user: User | null) => void,
-): Unsubscribe => onAuthStateChanged(auth, cb);
+export const onAuthChange = (cb: (user: User | null) => void): Unsubscribe =>
+  onAuthStateChanged(auth, cb);
 
-export const resetPassword = (email: string) =>
-  sendPasswordResetEmail(auth, email);
+export const resetPassword = (email: string) => sendPasswordResetEmail(auth, email);
 
 export const deleteAccount = async () => {
   const currentUser = auth.currentUser;
-  if (!currentUser) return;
+  if (!currentUser) {
+    return;
+  }
   await deleteUser(currentUser);
 };
 
@@ -43,11 +43,12 @@ export const updateEmailWithPassword = async (
   newEmail: string,
 ) => {
   const currentUser = auth.currentUser;
-  if (!currentUser) return;
+  if (!currentUser) {
+    return;
+  }
   const credential = EmailAuthProvider.credential(currentEmail, password);
   await reauthenticateWithCredential(currentUser, credential);
   await updateEmail(currentUser, newEmail);
 };
 
 export type { User, UserCredential };
-

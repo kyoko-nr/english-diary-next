@@ -9,6 +9,6 @@ const userInfoBase = atom<User | undefined>(undefined);
 
 export const currentUserInfoState = atom((get) => get(userInfoBase));
 
-export const setUserInfoAction = atom(undefined, (get, set, userInfo: User) =>
+export const setUserInfoAction = atom(undefined, (get, set, userInfo: User | undefined) =>
   set(userInfoBase, userInfo),
 );

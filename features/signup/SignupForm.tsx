@@ -1,6 +1,6 @@
 "use client";
 
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
 import {
@@ -12,6 +12,12 @@ import {
   BaseFrame,
 } from "@/shared";
 import { useRouter } from "next/navigation";
+import { signUp } from "@/shared/firebase/firebaseAuth";
+import { db } from "@/shared/firebase/firebaseClient";
+import { Timestamp, setDoc, doc } from "firebase/firestore";
+import Alert from "@mui/material/Alert";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
   username: yup.string().label("User name").required(),
@@ -33,9 +39,8 @@ interface FormType {
 }
 
 const SignupFormComponent: FC = () => {
-  //   const dispatch = useDispatch()
   const methods = useForm<FormType>({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
     defaultValues: {
       username: "",
       email: "",
@@ -46,28 +51,54 @@ const SignupFormComponent: FC = () => {
   const { control } = methods;
 
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (data: FormType) => {
-    // dispatch(clearErrors())
-    // dispatch(changeLoadingState(true))
-    // dispatch(
-    //   signUp({
-    //     username: data.username,
-    //     email: data.email,
-    //     password: data.password,
-    //     passwordConfirm: data.passwordConfirm,
-    //   })
-    // )
+  const onSubmit = async (data: FormType) => {
+    setError(null);
+    if (data.password !== data.passwordConfirm) {
+      setError("パスワードが一致しません");
+      return;
+    }
+    try {
+      const cred = await signUp(data.email, data.password);
+      const user = cred.user;
+      const ts = Timestamp.now();
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        email: data.email,
+        username: data.username,
+        createdAt: ts,
+        updatedAt: ts,
+      });
+      router.push("/signin");
+    } catch (e: any) {
+      // TODO: toastにする
+      switch (e?.code) {
+        case "auth/email-already-in-use":
+          setError("このメールアドレスは既に使用されています");
+          break;
+        case "auth/invalid-email":
+          setError("メールアドレスの形式が正しくありません");
+          break;
+        case "auth/weak-password":
+          setError("パスワードが弱すぎます");
+          break;
+        default:
+          setError("サインアップでエラーが発生しました");
+      }
+    }
   };
 
   return (
     <BaseFrame>
-      <Label
-        label={"Sign up for your English Diary!"}
-        variant={"h4"}
-        align={"center"}
-      />
+      <Label label={"Sign up for your English Diary!"} variant={"h4"} align={"center"} />
       <div className={"spacer-40"} />
+      {error && (
+        <>
+          <Alert severity="error">{error}</Alert>
+          <div className={"spacer-16"} />
+        </>
+      )}
       <XsColumnGridContainer>
         <TextInputStandard
           name="username"
@@ -76,13 +107,7 @@ const SignupFormComponent: FC = () => {
           type={"text"}
           required
         />
-        <TextInputStandard
-          name="email"
-          control={control}
-          label={"Email"}
-          type={"email"}
-          required
-        />
+        <TextInputStandard name="email" control={control} label={"Email"} type={"email"} required />
         <TextInputStandard
           name="password"
           control={control}

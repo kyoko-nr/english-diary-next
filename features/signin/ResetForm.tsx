@@ -12,6 +12,10 @@ import {
   BaseFrame,
 } from "@/shared";
 import { useRouter } from "next/navigation";
+import { resetPassword } from "@/shared/firebase/firebaseAuth";
+import Alert from "@mui/material/Alert";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
   email: yup.string().label("Email").required().email(),
@@ -22,23 +26,36 @@ interface IFormInput {
 }
 
 const ResetFormComponent: FC = () => {
-  // const dispatch = useDispatch()
   const { control, handleSubmit } = useForm<IFormInput>({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (data: IFormInput) => {
-    // dispatch(changeLoadingState(true))
-    // dispatch(resetPassword(data.email))
-    console.info("reset submit", data);
+  const onSubmit = async (data: IFormInput) => {
+    setError(null);
+    try {
+      await resetPassword(data.email);
+      router.push("/signin/sent");
+    } catch {
+      setError("パスワードリセットの送信に失敗しました");
+    }
   };
 
   return (
     <BaseFrame>
       <Label label={"Reset your password"} variant={"h4"} align={"center"} />
       <div className={"spacer-40"} />
+      {error && (
+        <>
+          <Alert severity="error">{error}</Alert>
+          <div className={"spacer-16"} />
+        </>
+      )}
       <XsColumnGridContainer>
         <TextInputStandard<IFormInput>
           name={"email"}

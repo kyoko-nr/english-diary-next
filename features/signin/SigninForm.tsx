@@ -11,6 +11,10 @@ import {
   XsColumnGridContainer,
 } from "@/shared";
 import { useRouter } from "next/navigation";
+import { signIn } from "@/shared/firebase/firebaseAuth";
+import Alert from "@mui/material/Alert";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
   email: yup.string().label("Email").required().email(),
@@ -23,21 +27,52 @@ interface IFormInput {
 }
 
 const SigninFormComponent: FC = () => {
-  // const dispatch = useDispatch()
   const { control, handleSubmit } = useForm<IFormInput>({
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (data: IFormInput) => {
-    // dispatch(clearErrors())
-    // dispatch(signIn({ email: data.email, password: data.password }))
-    console.info("signin submit", data);
+  const onSubmit = async (data: IFormInput) => {
+    setError(null);
+    try {
+      await signIn(data.email, data.password);
+      router.push("/edit");
+    } catch (e: any) {
+      // TODO: toastにする
+      switch (e?.code) {
+        case "auth/invalid-email":
+        case "auth/wrong-password":
+          setError("EmailまたはPasswordが正しくありません");
+          break;
+        case "auth/user-disabled":
+          setError("このユーザーは無効です");
+          break;
+        case "auth/user-not-found":
+          setError("ユーザーが見つかりません");
+          break;
+        case "auth/too-many-requests":
+          setError("失敗が多すぎます。しばらくしてからお試しください");
+          break;
+        default:
+          setError("サインインでエラーが発生しました");
+      }
+    }
   };
 
   return (
     <>
+      {error && (
+        <>
+          <Alert severity="error">{error}</Alert>
+          <div className={"spacer-16"} />
+        </>
+      )}
       <XsColumnGridContainer>
         <TextInputStandard
           name={"email"}

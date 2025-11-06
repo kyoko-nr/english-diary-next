@@ -1,6 +1,16 @@
 "use client";
 
-import { Timestamp, setDoc, doc, getDoc, collection, getDocs, deleteDoc, orderBy, query } from "firebase/firestore";
+import {
+  Timestamp,
+  setDoc,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  deleteDoc,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "./firebaseClient";
 import type { Diary, Word } from "@/shared/types/types";
 
@@ -98,4 +108,3 @@ export const fetchUserName = async (uid: string): Promise<string | undefined> =>
   const userDoc = await getDoc(doc(db, DOC_NAME_USERS, uid));
   return (userDoc.data() as { username?: string } | undefined)?.username;
 };
-

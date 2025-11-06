@@ -17,14 +17,7 @@ const ModelComponent: FC = () => {
     mixer.update(delta);
   });
 
-  return (
-    <primitive
-      object={gltf.scene}
-      dispose={null}
-      position={[0, -2, 0]}
-      scale={1}
-    />
-  );
+  return <primitive object={gltf.scene} dispose={null} position={[0, -2, 0]} scale={1} />;
 };
 
 export const Model = memo(ModelComponent);
