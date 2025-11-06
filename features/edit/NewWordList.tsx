@@ -14,13 +14,7 @@ type Props = {
   deleteWord: (wordIndex: number) => void;
 };
 
-const NewWordListComponent: FC<Props> = ({
-  diaryId,
-  control,
-  fields,
-  addWord,
-  deleteWord,
-}) => (
+const NewWordListComponent: FC<Props> = ({ diaryId, control, fields, addWord, deleteWord }) => (
   <>
     <Stack spacing={2}>
       {fields.map((field, index) => (
@@ -37,12 +31,7 @@ const NewWordListComponent: FC<Props> = ({
     </Stack>
     <div className="spacer-16" />
     <Box display="flex" justifyContent="center">
-      <TextButton
-        label={"add new word"}
-        size="large"
-        color="primary"
-        onClick={addWord}
-      />
+      <TextButton label={"add new word"} size="large" color="primary" onClick={addWord} />
     </Box>
   </>
 );

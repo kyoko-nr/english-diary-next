@@ -7,7 +7,7 @@ import { RequireAuth } from "@/shared/auth/RequireAuth";
 const EditPage: FC = () => {
   return (
     <RequireAuth>
-      <Edit diaryId={undefined} />
+      <Edit />
     </RequireAuth>
   );
 };

@@ -13,12 +13,7 @@ type Props = {
   wordIndex: number;
 };
 
-const AddibleContentComponent: FC<Props> = ({
-  feature,
-  fullWidth,
-  control,
-  wordIndex,
-}) => {
+const AddibleContentComponent: FC<Props> = ({ feature, fullWidth, control, wordIndex }) => {
   const { fields, remove, append } = useFieldArray({
     control: control,
     name: `words.${wordIndex}.${feature}`,
@@ -30,13 +25,7 @@ const AddibleContentComponent: FC<Props> = ({
   return (
     <>
       <Box display={"flex"} alignItems={"center"}>
-        <Label
-          label={feature}
-          variant="body1"
-          align="left"
-          capitalize={true}
-          bold={true}
-        />
+        <Label label={feature} variant="body1" align="left" capitalize={true} bold={true} />
         <AddIconButton feature={feature} onClick={addFeature} />
       </Box>
       <Grid container spacing={1}>

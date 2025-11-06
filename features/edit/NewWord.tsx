@@ -15,34 +15,18 @@ type Props = {
   wordIndex: number;
 };
 
-const NewWordComponent: FC<Props> = ({
-  word,
-  diaryId,
-  name,
-  control,
-  deleteWord,
-  wordIndex,
-}) => (
+const NewWordComponent: FC<Props> = ({ word, diaryId, name, control, deleteWord, wordIndex }) => (
   <Card variant="outlined" sx={{ width: "100%" }}>
     <CardContent sx={{ padding: "8px 16px", boxShadow: "none" }}>
       <Grid container spacing={2}>
         <Grid size={8}>
-          <WordTitleInput
-            defaultValue={word.title}
-            control={control}
-            wordIndex={wordIndex}
-          />
+          <WordTitleInput defaultValue={word.title} control={control} wordIndex={wordIndex} />
         </Grid>
         <Grid size={4}>
           <PosSelect control={control} name={`words.${wordIndex}.pos`} />
         </Grid>
       </Grid>
-      <AddibleContent
-        feature="meanings"
-        fullWidth={true}
-        control={control}
-        wordIndex={wordIndex}
-      />
+      <AddibleContent feature="meanings" fullWidth={true} control={control} wordIndex={wordIndex} />
       <div className="spacer-8" />
       <AddibleContent
         feature="synonyms"
@@ -51,12 +35,7 @@ const NewWordComponent: FC<Props> = ({
         wordIndex={wordIndex}
       />
       <div className="spacer-8" />
-      <AddibleContent
-        feature="examples"
-        fullWidth={true}
-        control={control}
-        wordIndex={wordIndex}
-      />
+      <AddibleContent feature="examples" fullWidth={true} control={control} wordIndex={wordIndex} />
     </CardContent>
     <CardActions>
       <Box display="flex" justifyContent="center">
