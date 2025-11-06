@@ -6,6 +6,7 @@ import {
   TextInputOutlined,
   Label,
   BaseFrame,
+  AppFrame,
 } from "@/shared";
 import Stack from "@mui/material/Stack";
 import { useMyPageEdit } from "./hooks/useMyPageEdit";
@@ -18,7 +19,7 @@ const MyPageEditComponent: FC = () => {
   }
 
   return (
-    <BaseFrame>
+    <AppFrame maxWidth="sm">
       <TextInputOutlined
         control={control}
         fullWidth={true}
@@ -41,11 +42,7 @@ const MyPageEditComponent: FC = () => {
         rows={0}
       />
       <div className={"spacer-8"} />
-      <Label
-        label={"Enter password to update email."}
-        variant={"body2"}
-        align={"left"}
-      />
+      <Label label={"Enter password to update email."} variant={"body2"} align={"left"} />
       <div className={"spacer-8"} />
       <TextInputOutlined
         control={control}
@@ -66,14 +63,9 @@ const MyPageEditComponent: FC = () => {
           color={"inherit"}
           onClick={() => history.back()}
         />
-        <ContainedButton
-          size={"mid"}
-          label={"save"}
-          color={"primary"}
-          onClick={onSubmit}
-        />
+        <ContainedButton size={"mid"} label={"save"} color={"primary"} onClick={onSubmit} />
       </Stack>
-    </BaseFrame>
+    </AppFrame>
   );
 };
 

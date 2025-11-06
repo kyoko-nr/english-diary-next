@@ -8,12 +8,7 @@ type Props = {
   color?: "primary" | "error";
 };
 
-const TextButtonComponent: FC<Props> = ({
-  label,
-  onClick,
-  size = "mid",
-  color = "primary",
-}) => {
+const TextButtonComponent: FC<Props> = ({ label, onClick, size = "mid", color = "primary" }) => {
   const style =
     size === "large"
       ? { width: 240, height: 40, borderRadius: 20, fontSize: 16 }

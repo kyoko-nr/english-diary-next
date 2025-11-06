@@ -1,40 +1,43 @@
 "use client";
-import { useEffect, FC, memo } from "react";
+import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { OutlineButton, Label, BaseFrame } from "@/shared";
+import { OutlineButton, Label, BaseFrame, AppFrame } from "@/shared";
+import { deleteAccount } from "@/shared/firebase/firebaseAuth";
+import { Stack } from "@mui/material";
 
 const DeleteAccountConfirmComponent: FC = () => {
   const router = useRouter();
 
-  const onDelete = () => {
-    // dispatch(changeLoadingState(true))
-    // dispatch(deleteAccount())
-    console.info("Delete account clicked");
+  const onDelete = async () => {
+    try {
+      await deleteAccount();
+      router.push("/signin");
+    } catch (e) {
+      // 失敗時は何もしない（TODO: エラー表示を追加する場合はここ）
+    }
   };
 
   return (
-    <BaseFrame>
-      <Label
-        label={"Are you sure to delete your account?"}
-        variant={"h5"}
-        align={"center"}
-      />
+    <AppFrame maxWidth="sm">
+      <Label label={"Are you sure to delete your account?"} variant={"h5"} align={"center"} />
       <div className={"spacer-40"} />
-      <div className={"button-wrapper"}>
+      <Stack
+        spacing={2}
+        direction="row"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <OutlineButton
           size={"mid"}
           label={"cancel"}
           color="inherit"
           onClick={() => router.push("/mypage")}
         />
-        <OutlineButton
-          size={"mid"}
-          label={"delete"}
-          color="error"
-          onClick={() => onDelete()}
-        />
-      </div>
-    </BaseFrame>
+        <OutlineButton size={"mid"} label={"delete"} color="error" onClick={() => onDelete()} />
+      </Stack>
+    </AppFrame>
   );
 };
 

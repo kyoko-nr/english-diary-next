@@ -8,11 +8,7 @@ type Props = {
 };
 
 const RemoveIconButtonComponent: FC<Props> = ({ featureIndex, onClick }) => (
-  <IconButton
-    onClick={() => onClick(featureIndex)}
-    color={"error"}
-    size="small"
-  >
+  <IconButton onClick={() => onClick(featureIndex)} color={"error"} size="small">
     <RemoveCircleOutlineIcon />
   </IconButton>
 );

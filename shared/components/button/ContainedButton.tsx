@@ -16,10 +16,7 @@ const ContainedButtonComponent: FC<Props> = ({
   size = "mid",
   color = "primary",
 }) => {
-  const style =
-    size === "large"
-      ? { width: 240, ...baseStyle }
-      : { width: 112, ...baseStyle };
+  const style = size === "large" ? { width: 240, ...baseStyle } : { width: 112, ...baseStyle };
 
   return (
     <Button onClick={onClick} variant={"contained"} color={color} sx={style}>

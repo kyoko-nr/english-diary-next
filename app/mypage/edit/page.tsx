@@ -2,9 +2,14 @@
 
 import { FC } from "react";
 import { MyPageEdit } from "@/features";
+import { RequireAuth } from "@/shared/auth/RequireAuth";
 
 const MyPageEditPage: FC = () => {
-  return <MyPageEdit />;
+  return (
+    <RequireAuth>
+      <MyPageEdit />
+    </RequireAuth>
+  );
 };
 
-export default MyPageEdit;
+export default MyPageEditPage;

@@ -10,16 +10,8 @@ type Props = {
 
 const baseStyle = { height: 40, borderRadius: 20, fontSize: 16 };
 
-const OutlineButtonComponent: FC<Props> = ({
-  label,
-  onClick,
-  size = "mid",
-  color = "inherit",
-}) => {
-  const style =
-    size === "large"
-      ? { width: 240, ...baseStyle }
-      : { width: 112, ...baseStyle };
+const OutlineButtonComponent: FC<Props> = ({ label, onClick, size = "mid", color = "inherit" }) => {
+  const style = size === "large" ? { width: 240, ...baseStyle } : { width: 112, ...baseStyle };
 
   return (
     <Button onClick={onClick} variant={"outlined"} color={color} sx={style}>
