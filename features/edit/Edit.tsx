@@ -2,9 +2,9 @@
 
 import { FC, memo } from "react";
 import Grid from "@mui/material/Grid";
-import { AppFrame } from "@/shared";
 import { DiaryEditor } from "./DiaryEditor";
-import { ArchiveList } from "@/features";
+import { AppFrame } from "../appframe";
+import { ArchiveList } from "../archive";
 
 type Props = {
   diaryId?: string;

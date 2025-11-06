@@ -1,9 +1,10 @@
 "use client";
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { OutlineButton, Label, BaseFrame, AppFrame } from "@/shared";
+import { OutlineButton, Label } from "@/shared";
 import { deleteAccount } from "@/shared/firebase/firebaseAuth";
 import { Stack } from "@mui/material";
+import { AppFrame } from "../appframe";
 
 const DeleteAccountConfirmComponent: FC = () => {
   const router = useRouter();

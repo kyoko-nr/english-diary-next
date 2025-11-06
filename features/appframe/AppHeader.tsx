@@ -4,7 +4,7 @@ import { AppBar, Divider, IconButton, Menu, MenuItem, Toolbar, Box } from "@mui/
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { FC, memo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Logo } from "../brand";
+import { Logo } from "../../shared/components/brand";
 
 const AppHeaderComponent: FC = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const AppHeaderComponent: FC = () => {
           boxSizing: "border-box",
         }}
       >
-        <Logo variant={"h5"} component={"div"} onClick={() => router.push("/")} isLink={true} />
+        <Logo variant={"h5"} component={"div"} onClick={() => router.push("/edit")} isLink={true} />
         <Box sx={{ margin: "0 0 0 auto" }}>
           <IconButton className="grey-text" onClick={handleMenu}>
             <AccountCircleIcon fontSize={"large"} />
