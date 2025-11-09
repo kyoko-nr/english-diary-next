@@ -3,11 +3,16 @@
 import { Edit } from "@/features";
 import { useParams } from "next/navigation";
 import { FC } from "react";
+import { RequireAuth } from "@/shared";
 
-const EditPage: FC = () => {
+const EditDiaryPage: FC = () => {
   const params = useParams();
   const { id } = params;
-  return <Edit diaryId={id as string} />;
+  return (
+    <RequireAuth>
+      <Edit diaryId={id as string} />
+    </RequireAuth>
+  );
 };
 
-export default EditPage;
+export default EditDiaryPage;

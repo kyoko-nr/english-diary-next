@@ -1,5 +1,5 @@
-import { WordChip } from "@/shared/components/word";
-import { PosIndexes } from "@/shared/constants/Parts";
+import { WordChip } from "./WordChip";
+import { PosIndexes } from "../../constants/Parts";
 import { FC, memo } from "react";
 
 type Props = {

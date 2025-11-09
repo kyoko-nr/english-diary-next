@@ -1,7 +1,7 @@
 "use client";
 
 import { TextField, Box, Grid } from "@mui/material";
-import { RemoveIconButton } from "@/shared/components/button";
+import { RemoveIconButton } from "../button";
 import { Control, FieldValues, Path, useController } from "react-hook-form";
 import { memo } from "react";
 
@@ -25,12 +25,7 @@ const TextInputDeletableComponent = <T extends FieldValues>({
   return (
     <Grid size={fullWidth ? 12 : 3}>
       <Box display={"flex"}>
-        <TextField
-          {...field}
-          variant="standard"
-          required={false}
-          fullWidth={fullWidth}
-        />
+        <TextField {...field} variant="standard" required={false} fullWidth={fullWidth} />
         <RemoveIconButton featureIndex={featureIndex} onClick={deleteFeature} />
       </Box>
     </Grid>

@@ -2,7 +2,7 @@
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
 import { OutlineButton, Label } from "@/shared";
-import { deleteAccount } from "@/shared/firebase/firebaseAuth";
+import { deleteAccount } from "@/shared";
 import { Stack } from "@mui/material";
 import { AppFrame } from "../appframe";
 

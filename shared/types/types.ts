@@ -12,8 +12,6 @@ export type Word = {
   synonyms: Addible[];
   examples: Addible[];
   pos: string;
-  createdAt: Date;
-  diaryId?: string;
 };
 
 export type Addible = {
@@ -36,7 +34,7 @@ export type SortOption = {
   value: SortType;
 };
 
-export type WordForm = {
+export type DiaryForm = {
   title: string;
   content: string;
   words: Word[];

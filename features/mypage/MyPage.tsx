@@ -1,10 +1,11 @@
 "use client";
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { AppFrame, Label, OutlineButton } from "@/shared";
+import { Label, OutlineButton } from "@/shared";
 import Stack from "@mui/material/Stack";
 import { useAtomValue } from "jotai";
-import { currentUserInfoState } from "@/shared/state/userInfoState";
+import { currentUserInfoState } from "@/shared";
+import { AppFrame } from "../appframe/AppFrame";
 
 const MyPageComponent: FC = () => {
   const user = useAtomValue(currentUserInfoState);

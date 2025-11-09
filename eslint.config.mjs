@@ -11,6 +11,51 @@ const eslintConfig = defineConfig([
     rules: {
       curly: "error",
       "brace-style": ["error", "1tbs", { allowSingleLine: false }],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/shared/*", "@/features/*"],
+              message: "Restricted import from sub path",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  // shared 配下では '@/shared' 系の import を禁止（相対パスを使用）
+  {
+    files: ["shared/**/*.{ts,tsx,js,jsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/shared", "@/shared/*"],
+              message: "shared 内では相対パス（../...）を使用してください。",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  // features 配下では '@/features' 系の import を禁止（相対パスを使用）
+  {
+    files: ["features/**/*.{ts,tsx,js,jsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/features", "@/features/*"],
+              message: "features 内では相対パス（../...）を使用してください。",
+            },
+          ],
+        },
+      ],
     },
   },
   globalIgnores([

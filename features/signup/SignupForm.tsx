@@ -12,8 +12,7 @@ import {
   BaseFrame,
 } from "@/shared";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/shared/firebase/firebaseAuth";
-import { db } from "@/shared/firebase/firebaseClient";
+import { signUp, db } from "@/shared";
 import { Timestamp, setDoc, doc } from "firebase/firestore";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";

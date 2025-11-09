@@ -1,21 +1,20 @@
 "use client";
 import { Card, CardContent, CardActions, Grid, Box } from "@mui/material";
-import { TextButton, PosSelect, WordTitleInput } from "@/shared";
+import { TextButton, PosSelect, WordTitleInput, Word } from "@/shared";
 import { Control } from "react-hook-form";
-import { Word, WordForm } from "@/shared/types/types";
+import { WordForm } from "./types/wordForm";
 import { FC, memo } from "react";
 import { AddibleContent } from "./AddibleContent";
 
 type Props = {
   word: Word;
-  diaryId: string;
   name: string;
   control: Control<WordForm>;
   deleteWord: (wordIndex: number) => void;
   wordIndex: number;
 };
 
-const NewWordComponent: FC<Props> = ({ word, diaryId, name, control, deleteWord, wordIndex }) => (
+const NewWordComponent: FC<Props> = ({ word, name, control, deleteWord, wordIndex }) => (
   <Card variant="outlined" sx={{ width: "100%" }}>
     <CardContent sx={{ padding: "8px 16px", boxShadow: "none" }}>
       <Grid container spacing={2}>

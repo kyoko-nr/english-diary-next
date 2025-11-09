@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { MyPage } from "@/features";
-import { RequireAuth } from "@/shared/auth/RequireAuth";
+import { RequireAuth } from "@/shared";
 
 const MyPagePage: FC = () => {
   return (

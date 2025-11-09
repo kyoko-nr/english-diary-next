@@ -37,13 +37,7 @@ const DiaryEditorComponent: FC = () => {
         type={"text"}
       />
       <div className={"spacer-8"} />
-      <NewWordList
-        diaryId={diaryData.id}
-        control={control}
-        fields={fields}
-        addWord={addWord}
-        deleteWord={deleteWord}
-      />
+      <NewWordList control={control} fields={fields} addWord={addWord} deleteWord={deleteWord} />
       <div className={"spacer-32"} />
       <Stack spacing={2} direction="row" justifyContent="center">
         <OutlineButton label={"clear"} size="mid" color={"inherit"} onClick={initFields} />

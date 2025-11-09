@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { MyPageEdit } from "@/features";
-import { RequireAuth } from "@/shared/auth/RequireAuth";
+import { RequireAuth } from "@/shared";
 
 const MyPageEditPage: FC = () => {
   return (

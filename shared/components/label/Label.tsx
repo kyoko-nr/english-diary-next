@@ -28,11 +28,7 @@ const LabelComponent: FC<Props> = ({
     color={color ? color : "text"}
     sx={{
       display: "block",
-      textTransform: uppercase
-        ? "uppercase"
-        : capitalize
-          ? "capitalize"
-          : "none",
+      textTransform: uppercase ? "uppercase" : capitalize ? "capitalize" : "none",
     }}
     fontWeight={bold ? "500" : "400"}
     textOverflow={overflowElipses ? "ellipsis" : "none"}

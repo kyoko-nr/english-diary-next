@@ -1,11 +1,6 @@
 import { atom } from "jotai";
 import { currentSortKeyAtom } from "./currentSortKeyState";
-import {
-  AlphabetIndexes,
-  AlphabetType,
-  PosIndexes,
-  PosType,
-} from "@/shared/constants/Parts";
+import { AlphabetIndexes, AlphabetType, PosIndexes, PosType } from "@/shared";
 
 const indexesMap = {
   alp: AlphabetIndexes,
@@ -25,6 +20,5 @@ export const currentIndexKeyAtom = atom((get) => get(currentIndexBase));
 
 export const setCurrentIndexKeyAction = atom(
   undefined,
-  (get, set, key: AlphabetType | PosType | undefined) =>
-    set(currentIndexBase, key),
+  (get, set, key: AlphabetType | PosType | undefined) => set(currentIndexBase, key),
 );

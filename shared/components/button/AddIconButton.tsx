@@ -1,7 +1,7 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { IconButton } from "@mui/material";
 import { FC, memo } from "react";
-import { Feature } from "@/shared/types/types";
+import { Feature } from "../../types/types";
 
 type Props = {
   feature: Feature;

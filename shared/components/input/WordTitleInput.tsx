@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { Controller, useController, Control } from "react-hook-form";
-import { WordForm } from "@/shared/types/types";
+import { DiaryForm } from "../../types/types";
 import { FC, memo } from "react";
 
 type Props = {

@@ -1,6 +1,6 @@
 import { Typography, Stack } from "@mui/material";
-import { Label } from "@/shared/components/label";
-import { Addible, Feature } from "@/shared/types/types";
+import { Label } from "../label";
+import { Addible, Feature } from "../../types/types";
 import { FC, memo } from "react";
 
 type Props = {
@@ -10,13 +10,7 @@ type Props = {
 
 const WordFeatureComponent: FC<Props> = ({ feature, featureName }) => (
   <div>
-    <Label
-      label={featureName}
-      variant="body1"
-      align="left"
-      capitalize={true}
-      bold={true}
-    />
+    <Label label={featureName} variant="body1" align="left" capitalize={true} bold={true} />
     <Stack spacing={1}>
       {feature.map((fe, idx) => (
         <Typography

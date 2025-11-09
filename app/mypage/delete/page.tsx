@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { DeleteAccountConfirm } from "@/features";
-import { RequireAuth } from "@/shared/auth/RequireAuth";
+import { RequireAuth } from "@/shared";
 
 const DeleteAccountPage: FC = () => {
   return (

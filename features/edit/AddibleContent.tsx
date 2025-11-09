@@ -1,9 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import { useFieldArray, Control, Path } from "react-hook-form";
-import { TextInputDeletable } from "@/shared/components/input";
-import { Label } from "@/shared/components/label";
-import { AddIconButton } from "@/shared/components/button";
-import { Feature, WordForm } from "@/shared/types/types";
+import { TextInputDeletable, Label, AddIconButton, type Feature } from "@/shared";
+import type { WordForm } from "@/shared/types/types";
 import { FC, memo } from "react";
 
 type Props = {

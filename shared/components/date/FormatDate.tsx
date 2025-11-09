@@ -14,12 +14,7 @@ const formatMap = {
   date: "iii dd/MM/yyyy",
 } satisfies Record<Props["formatType"], string>;
 
-const FormatDateComponent: FC<Props> = ({
-  date,
-  formatType,
-  variant,
-  align,
-}) => {
+const FormatDateComponent: FC<Props> = ({ date, formatType, variant, align }) => {
   const formated = format(date, formatMap[formatType]);
 
   return (

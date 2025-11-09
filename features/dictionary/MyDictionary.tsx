@@ -1,14 +1,14 @@
 "use client";
 import { FC, memo } from "react";
-import { BaseFrame } from "@/shared";
 import { MyDictContent } from "./MyDictContent";
 import { SortSelection } from "./SortSelection";
+import { AppFrame } from "../appframe";
 
 const MyDictionaryComponent: FC = () => (
-  <BaseFrame>
+  <AppFrame maxWidth="lg">
     <SortSelection />
     <MyDictContent />
-  </BaseFrame>
+  </AppFrame>
 );
 
 export const MyDictionary = memo(MyDictionaryComponent);

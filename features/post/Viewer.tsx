@@ -1,17 +1,12 @@
 "use client";
 import { FC, memo } from "react";
-import { Diary } from "@/shared/types/types";
-import {
-  WordCards,
-  TextButton,
-  Label,
-  OutlineButton,
-  FormatDate,
-} from "@/shared";
+import { Diary } from "@/shared";
+import { WordCards, TextButton, Label, OutlineButton, FormatDate } from "@/shared";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 import { useViewer } from "./hooks/useViewer";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const ViewerComponent: FC = () => {
   const router = useRouter();
@@ -23,22 +18,13 @@ const ViewerComponent: FC = () => {
 
   return (
     <>
-      <FormatDate
-        date={diary.date}
-        formatType={"date"}
-        variant={"body1"}
-        align={"left"}
-      />
+      <FormatDate date={diary.date} formatType={"date"} variant={"body1"} align={"left"} />
       <div className={"spacer-24"} />
       <Label label={diary.title} variant={"h5"} align={"left"} />
       <div className={"spacer-24"} />
       <Label label={`${count} words`} variant={"caption"} align={"right"} />
       <div className={"spacer-8"} />
-      <Typography
-        variant={"body1"}
-        align="left"
-        sx={{ display: "block", whiteSpace: "pre-wrap" }}
-      >
+      <Typography variant={"body1"} align="left" sx={{ display: "block", whiteSpace: "pre-wrap" }}>
         {diary.content}
       </Typography>
       <div className={"spacer-32"} />

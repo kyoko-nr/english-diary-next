@@ -2,11 +2,8 @@
 import { FC, memo } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  currentSortKeyAtom,
-  setCurrentSortKeyAction,
-} from "./states/currentSortKeyState";
-import { SortOptions } from "@/shared/constants/Parts";
+import { currentSortKeyAtom, setCurrentSortKeyAction } from "./states/currentSortKeyState";
+import { SortOptions } from "@/shared";
 
 const SortSelectionComponent: FC = () => {
   const sortKey = useAtomValue(currentSortKeyAtom);

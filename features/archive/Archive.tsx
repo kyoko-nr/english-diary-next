@@ -2,7 +2,7 @@
 import { FC, memo } from "react";
 import { Card, CardActionArea, CardContent } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Diary } from "@/shared/types/types";
+import { Diary } from "@/shared";
 import { FormatDate, WordChip, Label, RowGridContainer } from "@/shared";
 
 type Props = {
@@ -13,18 +13,10 @@ const ArchiveComponent: FC<Props> = ({ diary }) => {
   const router = useRouter();
 
   return (
-    <CardActionArea
-      component="a"
-      onClick={() => router.push(`/post/${diary.id}`)}
-    >
+    <CardActionArea component="a" onClick={() => router.push(`/post/${diary.id}`)}>
       <Card sx={{ boxShadow: "none" }}>
         <CardContent sx={{ padding: 2, borderBottom: "1px solid #4a4a4a" }}>
-          <FormatDate
-            date={diary.date}
-            formatType={"date"}
-            variant={"caption"}
-            align={"left"}
-          />
+          <FormatDate date={diary.date} formatType={"date"} variant={"caption"} align={"left"} />
           <Label
             label={diary.title}
             variant="body1"
@@ -32,12 +24,7 @@ const ArchiveComponent: FC<Props> = ({ diary }) => {
             bold={true}
             overflowElipses={true}
           />
-          <Label
-            label={diary.content}
-            variant="body2"
-            align="left"
-            overflowElipses={true}
-          />
+          <Label label={diary.content} variant="body2" align="left" overflowElipses={true} />
           {diary.words && diary.words.length > 0 && (
             <>
               <div className="spacer-8" />

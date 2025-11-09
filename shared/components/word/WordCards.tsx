@@ -1,5 +1,5 @@
-import { Word } from "@/shared/types/types";
-import { WordCard } from "@/shared/components/word";
+import { Word } from "../../types/types";
+import { WordCard } from "../word";
 import { Stack } from "@mui/material";
 import { FC, memo } from "react";
 
@@ -10,10 +10,7 @@ type Props = {
 
 const WordCardsComponent: FC<Props> = ({ words, hasDate }) => (
   <Stack direction="column" spacing={2}>
-    {words &&
-      words.map((word) => (
-        <WordCard word={word} key={word.title} hasDate={hasDate} />
-      ))}
+    {words && words.map((word) => <WordCard word={word} key={word.title} hasDate={hasDate} />)}
   </Stack>
 );
 

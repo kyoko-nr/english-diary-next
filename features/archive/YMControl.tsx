@@ -12,22 +12,9 @@ type Props = {
 const YMControlComponent: FC<Props> = ({ date, onClick }) => {
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
-      <ArrowIconButton
-        type="back"
-        onClick={onClick}
-        nextYM={subMonths(date, 1)}
-      />
-      <FormatDate
-        date={date}
-        formatType={"ym"}
-        variant={"h6"}
-        align={"center"}
-      />
-      <ArrowIconButton
-        type="forward"
-        onClick={onClick}
-        nextYM={addMonths(date, 1)}
-      />
+      <ArrowIconButton type="back" onClick={onClick} nextYM={subMonths(date, 1)} />
+      <FormatDate date={date} formatType={"ym"} variant={"h6"} align={"center"} />
+      <ArrowIconButton type="forward" onClick={onClick} nextYM={addMonths(date, 1)} />
     </Box>
   );
 };

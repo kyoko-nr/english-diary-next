@@ -12,7 +12,7 @@ import {
   BaseFrame,
 } from "@/shared";
 import { useRouter } from "next/navigation";
-import { resetPassword } from "@/shared/firebase/firebaseAuth";
+import { resetPassword } from "@/shared";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";

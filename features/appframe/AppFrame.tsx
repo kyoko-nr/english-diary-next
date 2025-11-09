@@ -1,6 +1,6 @@
 import { FC, memo, ReactNode } from "react";
 import { Container } from "@mui/material";
-import { AppHeader } from "../../../features/header";
+import { AppHeader } from "./AppHeader";
 
 type Props = {
   children: ReactNode;

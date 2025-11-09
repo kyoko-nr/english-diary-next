@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAtomValue } from "jotai";
-import { authInitializedState, currentUserInfoState } from "@/shared/state";
+import { authInitializedState, currentUserInfoState } from "../state";
 
 type Props = {
   children?: ReactNode;

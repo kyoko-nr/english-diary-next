@@ -1,15 +1,9 @@
 "use client";
 import { FC, memo } from "react";
-import {
-  OutlineButton,
-  ContainedButton,
-  TextInputOutlined,
-  Label,
-  BaseFrame,
-  AppFrame,
-} from "@/shared";
+import { OutlineButton, ContainedButton, TextInputOutlined, Label } from "@/shared";
 import Stack from "@mui/material/Stack";
 import { useMyPageEdit } from "./hooks/useMyPageEdit";
+import { AppFrame } from "../appframe/AppFrame";
 
 const MyPageEditComponent: FC = () => {
   const { onSubmit, control, user } = useMyPageEdit();

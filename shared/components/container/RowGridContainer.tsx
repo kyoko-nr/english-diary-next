@@ -7,17 +7,8 @@ type Props = {
   justifyContent: "center" | "flex-start";
 };
 
-const RowGridContainerComponent: FC<Props> = ({
-  children,
-  spacing,
-  justifyContent,
-}) => (
-  <Grid
-    container
-    spacing={spacing}
-    justifyContent={justifyContent}
-    alignItems="center"
-  >
+const RowGridContainerComponent: FC<Props> = ({ children, spacing, justifyContent }) => (
+  <Grid container spacing={spacing} justifyContent={justifyContent} alignItems="center">
     {Children.map(children, (child) => {
       return <Grid container>{child}</Grid>;
     })}

@@ -1,4 +1,4 @@
-import type { Option, SortOption } from "@/shared/types/types";
+import type { Option, SortOption } from "../types/types";
 
 export type PosType =
   | "noun"

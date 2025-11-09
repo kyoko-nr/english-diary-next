@@ -1,9 +1,8 @@
-import { Word } from "@/shared/types/types";
+import { Word, AlphabetType, PosType } from "@/shared";
 import { atom } from "jotai";
 import { currentSortKeyAtom } from "./currentSortKeyState";
 import { sortByWordProperty } from "../logics/sortByWordProperty";
 import { currentIndexKeyAtom } from "./currentIndexState";
-import { AlphabetType, PosType } from "@/shared/constants/Parts";
 
 const wordsBase = atom<Word[]>([]);
 

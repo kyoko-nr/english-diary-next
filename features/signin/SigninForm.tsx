@@ -11,7 +11,7 @@ import {
   XsColumnGridContainer,
 } from "@/shared";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/shared/firebase/firebaseAuth";
+import { signIn } from "@/shared";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
