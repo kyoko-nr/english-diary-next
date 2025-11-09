@@ -8,6 +8,7 @@ import { Word } from "@/shared";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDiary, currentUserInfoState, saveDiary } from "@/shared";
 import { setCurrentDiaryIdAction } from "@/shared";
+import { useRouter } from "next/navigation";
 
 type DiaryForm = {
   title: string;
@@ -40,6 +41,7 @@ const countWords = (content: string): number => {
 const loadableDiaryAtom = loadable(currentDiaryAtom);
 
 export const useDiaryEditor = () => {
+  const router = useRouter();
   const user = useAtomValue(currentUserInfoState);
 
   const currentDiary = useAtomValue(loadableDiaryAtom);
@@ -91,14 +93,14 @@ export const useDiaryEditor = () => {
         words: values.words,
         date: diaryData.date,
       });
-      setCurrentDiaryId(id);
+      router.push(`/post/${id}`);
     } else {
       const id = await createDiary(user.uid, {
         title: values.title,
         content: values.content,
         words: values.words,
       });
-      setCurrentDiaryId(id);
+      router.push(`/post/${id}`);
     }
   };
 

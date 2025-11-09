@@ -1,21 +1,25 @@
 "use client";
 import { FC, memo } from "react";
 import Grid from "@mui/material/Grid";
-import { BaseFrame } from "@/shared";
 import { Viewer } from "./Viewer";
 import { ArchiveList } from "../archive";
+import { AppFrame } from "../appframe";
 
-const PostComponent: FC = () => (
-  <BaseFrame>
+type Props = {
+  diaryId: string;
+};
+
+const PostComponent: FC<Props> = ({ diaryId }) => (
+  <AppFrame maxWidth="lg">
     <Grid container spacing={3}>
-      <Grid size={12}>
-        <Viewer />
+      <Grid size={{ xs: 12, md: 8 }}>
+        <Viewer diaryId={diaryId} />
       </Grid>
-      <Grid size={12}>
+      <Grid size={{ xs: 12, md: 4 }}>
         <ArchiveList />
       </Grid>
     </Grid>
-  </BaseFrame>
+  </AppFrame>
 );
 
 export const Post = memo(PostComponent);

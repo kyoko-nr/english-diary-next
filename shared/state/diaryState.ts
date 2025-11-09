@@ -6,15 +6,13 @@ import { fetchDiaries } from "../firebase/diaryRepository";
 
 const diaryIdBase = atom<string | undefined>(undefined);
 
-export const setCurrentDiaryIdAction = atom(undefined, (get, set, diaryId: string) =>
+export const setCurrentDiaryIdAction = atom(undefined, (get, set, diaryId: string | undefined) =>
   set(diaryIdBase, diaryId),
 );
 
 export const currentDiaryAtom = atom<Promise<undefined | Diary>>(async (get) => {
   const id = get(diaryIdBase);
-  const diary = (await get(allDiariesAtom)).find((diary) => diary.id === id);
-  console.log("current diary", diary);
-  return diary;
+  return (await get(allDiariesAtom)).find((diary) => diary.id === id);
 });
 
 const selectedYMBase = atom<Date>(new Date());
