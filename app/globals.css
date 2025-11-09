@@ -10,32 +10,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Spacers (from modules/_spacing.scss) */
-.spacer-8 {
-  height: 8px;
-  width: 100%;
-}
-.spacer-16 {
-  height: 16px;
-  width: 100%;
-}
-.spacer-24 {
-  height: 24px;
-  width: 100%;
-}
-.spacer-32 {
-  height: 32px;
-  width: 100%;
-}
-.spacer-40 {
-  height: 40px;
-  width: 100%;
-}
-.spacer-64 {
-  height: 64px;
-  width: 100%;
-}
-
 /* Base and utilities (from breakpoints/_base.scss) */
 body {
   font-size: 14px;

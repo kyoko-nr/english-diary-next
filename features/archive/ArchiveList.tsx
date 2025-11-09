@@ -11,9 +11,8 @@ const ArchiveListComponent: FC = () => {
   const { archives, selectedYM, changeSelectedYM } = useArchiveList();
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
       <YMControl date={selectedYM} onClick={changeSelectedYM} />
-      <div className={"spacer-8"} />
       <Box sx={{ overflowY: "auto" }}>
         {archives && archives.length > 0 ? (
           archives.map((value: Diary) => <Archive diary={value} key={value.id} />)
@@ -21,7 +20,7 @@ const ArchiveListComponent: FC = () => {
           <Label label="No diary" variant="body1" align="center" />
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 

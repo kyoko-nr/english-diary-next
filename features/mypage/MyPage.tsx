@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import { useAtomValue } from "jotai";
 import { currentUserInfoState } from "@/shared";
 import { AppFrame } from "../appframe/AppFrame";
+import { Box } from "@mui/material";
 
 const MyPageComponent: FC = () => {
   const user = useAtomValue(currentUserInfoState);
@@ -19,12 +20,14 @@ const MyPageComponent: FC = () => {
 
   return (
     <AppFrame maxWidth="sm">
-      <Label label={"User name："} variant={"body2"} align={"left"} />
-      <Label label={username} variant={"h5"} align={"left"} />
-      <div className={"spacer-16"} />
-      <Label label={"Email："} variant={"body2"} align={"left"} />
-      <Label label={email} variant={"h5"} align={"left"} />
-      <div className={"spacer-64"} />
+      <Box sx={{ paddingBottom: 2 }}>
+        <Label label={"User name："} variant={"body2"} align={"left"} />
+        <Label label={username} variant={"h5"} align={"left"} />
+      </Box>
+      <Box sx={{ paddingBottom: 8 }}>
+        <Label label={"Email："} variant={"body2"} align={"left"} />
+        <Label label={email} variant={"h5"} align={"left"} />
+      </Box>
       <Stack spacing={2} direction="row" alignItems="center">
         <OutlineButton
           size={"large"}

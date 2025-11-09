@@ -3,18 +3,13 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import {
-  PlaneButton,
-  SimpleLink,
-  TextButton,
-  TextInputStandard,
-  XsColumnGridContainer,
-} from "@/shared";
+import { PlaneButton, SimpleLink, TextButton, TextInputStandard } from "@/shared";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/shared";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Container, Stack } from "@mui/material";
 
 const schema = yup.object().shape({
   email: yup.string().label("Email").required().email(),
@@ -70,41 +65,39 @@ const SigninFormComponent: FC = () => {
       {error && (
         <>
           <Alert severity="error">{error}</Alert>
-          <div className={"spacer-16"} />
         </>
       )}
-      <XsColumnGridContainer>
-        <TextInputStandard
-          name={"email"}
-          control={control}
-          label={"Email"}
-          type={"email"}
-          required
-        />
-        <TextInputStandard
-          name={"password"}
-          control={control}
-          label={"Password"}
-          type={"password"}
-          required
-        />
-      </XsColumnGridContainer>
-      <div className={"spacer-16"} />
-      <SimpleLink
-        label={"Forgot your password?"}
-        onClick={() => router.push("/signin/reset")}
-        color={"textPrimary"}
-        variant={"body2"}
-      />
-      <div className={"spacer-32"} />
-      <PlaneButton label={"sign in"} onClick={handleSubmit(onSubmit)} />
-      <div className={"spacer-16"} />
-      <TextButton
-        label={"sign up"}
-        onClick={() => router.push("/signup")}
-        size={"large"}
-        color={"primary"}
-      />
+      <Container maxWidth={"xs"}>
+        <Stack spacing={2} alignItems={"center"}>
+          <TextInputStandard
+            name={"email"}
+            control={control}
+            label={"Email"}
+            type={"email"}
+            required
+          />
+          <TextInputStandard
+            name={"password"}
+            control={control}
+            label={"Password"}
+            type={"password"}
+            required
+          />
+          <SimpleLink
+            label={"Forgot your password?"}
+            onClick={() => router.push("/signin/reset")}
+            color={"textPrimary"}
+            variant={"body2"}
+          />
+          <PlaneButton label={"sign in"} onClick={handleSubmit(onSubmit)} />
+          <TextButton
+            label={"sign up"}
+            onClick={() => router.push("/signup")}
+            size={"large"}
+            color={"primary"}
+          />
+        </Stack>
+      </Container>
     </>
   );
 };

@@ -3,20 +3,14 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import {
-  PlaneButton,
-  Label,
-  XsColumnGridContainer,
-  TextInputStandard,
-  SimpleLink,
-  BaseFrame,
-} from "@/shared";
+import { PlaneButton, Label, TextInputStandard, SimpleLink, BaseFrame } from "@/shared";
 import { useRouter } from "next/navigation";
 import { signUp, db } from "@/shared";
 import { Timestamp, setDoc, doc } from "firebase/firestore";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Container, Stack } from "@mui/material";
 
 const schema = yup.object().shape({
   username: yup.string().label("User name").required(),
@@ -90,47 +84,55 @@ const SignupFormComponent: FC = () => {
 
   return (
     <BaseFrame>
-      <Label label={"Sign up for your English Diary!"} variant={"h4"} align={"center"} />
-      <div className={"spacer-40"} />
-      {error && (
-        <>
-          <Alert severity="error">{error}</Alert>
-          <div className={"spacer-16"} />
-        </>
-      )}
-      <XsColumnGridContainer>
-        <TextInputStandard
-          name="username"
-          control={control}
-          label={"User name"}
-          type={"text"}
-          required
-        />
-        <TextInputStandard name="email" control={control} label={"Email"} type={"email"} required />
-        <TextInputStandard
-          name="password"
-          control={control}
-          label={"Password"}
-          type={"password"}
-          required
-        />
-        <TextInputStandard
-          name="passwordConfirm"
-          control={control}
-          label={"Password to confirm"}
-          type={"password"}
-          required
-        />
-      </XsColumnGridContainer>
-      <div className={"spacer-32"} />
-      <PlaneButton label={"sign up"} onClick={methods.handleSubmit(onSubmit)} />
-      <div className={"spacer-16"} />
-      <SimpleLink
-        label={"Go to sign in page"}
-        onClick={() => router.push("/signin")}
-        color={"textPrimary"}
-        variant={"body2"}
-      />
+      <Box sx={{ paddingBottom: 4 }}>
+        <Label label={"Sign up for your English Diary!"} variant={"h4"} align={"center"} />
+      </Box>
+      <Container maxWidth={"xs"}>
+        <Stack spacing={3} sx={{ paddingBottom: 4 }}>
+          {error && (
+            <>
+              <Alert severity="error">{error}</Alert>
+            </>
+          )}
+          <TextInputStandard
+            name="username"
+            control={control}
+            label={"User name"}
+            type={"text"}
+            required
+          />
+          <TextInputStandard
+            name="email"
+            control={control}
+            label={"Email"}
+            type={"email"}
+            required
+          />
+          <TextInputStandard
+            name="password"
+            control={control}
+            label={"Password"}
+            type={"password"}
+            required
+          />
+          <TextInputStandard
+            name="passwordConfirm"
+            control={control}
+            label={"Password to confirm"}
+            type={"password"}
+            required
+          />
+        </Stack>
+        <Stack spacing={2} alignItems={"center"}>
+          <PlaneButton label={"sign up"} onClick={methods.handleSubmit(onSubmit)} />
+          <SimpleLink
+            label={"Go to sign in page"}
+            onClick={() => router.push("/signin")}
+            color={"textPrimary"}
+            variant={"body2"}
+          />
+        </Stack>
+      </Container>
     </BaseFrame>
   );
 };

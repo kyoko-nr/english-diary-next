@@ -15,7 +15,6 @@ const DictIndexComponent: FC = () => {
 
   return (
     <>
-      <div className={"spacer-24"} />
       {indexes.length > 0 && (
         <RowGridContainer spacing={2} justifyContent="flex-start">
           {indexes.map((indexLetter) => (

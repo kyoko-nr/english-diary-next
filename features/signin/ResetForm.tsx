@@ -3,19 +3,13 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import {
-  PlaneButton,
-  Label,
-  XsColumnGridContainer,
-  TextInputStandard,
-  SimpleLink,
-  BaseFrame,
-} from "@/shared";
+import { PlaneButton, Label, TextInputStandard, SimpleLink, BaseFrame } from "@/shared";
 import { useRouter } from "next/navigation";
 import { resetPassword } from "@/shared";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Stack } from "@mui/material";
 
 const schema = yup.object().shape({
   email: yup.string().label("Email").required().email(),
@@ -48,32 +42,28 @@ const ResetFormComponent: FC = () => {
 
   return (
     <BaseFrame>
-      <Label label={"Reset your password"} variant={"h4"} align={"center"} />
-      <div className={"spacer-40"} />
-      {error && (
-        <>
-          <Alert severity="error">{error}</Alert>
-          <div className={"spacer-16"} />
-        </>
-      )}
-      <XsColumnGridContainer>
-        <TextInputStandard<IFormInput>
+      <Stack spacing={3} alignItems={"center"}>
+        <Label label={"Reset your password"} variant={"h4"} align={"center"} />
+        {error && (
+          <>
+            <Alert severity="error">{error}</Alert>
+          </>
+        )}
+        <TextInputStandard
           name={"email"}
           control={control}
           label={"Email"}
           type={"email"}
           required
         />
-      </XsColumnGridContainer>
-      <div className={"spacer-32"} />
-      <PlaneButton label={"send email"} onClick={handleSubmit(onSubmit)} />
-      <div className={"spacer-16"} />
-      <SimpleLink
-        label={"Already have an account?"}
-        onClick={() => router.push("/signin")}
-        color={"textPrimary"}
-        variant={"body2"}
-      />
+        <PlaneButton label={"send email"} onClick={handleSubmit(onSubmit)} />
+        <SimpleLink
+          label={"Already have an account?"}
+          onClick={() => router.push("/signin")}
+          color={"textPrimary"}
+          variant={"body2"}
+        />
+      </Stack>
     </BaseFrame>
   );
 };

@@ -19,7 +19,7 @@ export {
   ArrowIconButton,
 } from "./components/button";
 export { Label } from "./components/label";
-export { XsColumnGridContainer, RowGridContainer } from "./components/container";
+export { RowGridContainer } from "./components/container";
 export {
   TextInputStandard,
   TextInputOutlined,
