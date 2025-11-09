@@ -4,6 +4,7 @@ export {
   currentDiaryArchiveAtom,
   selectedYMAtom,
   setSelectedYMAction,
+  setCurrentDiaryIdAction,
 } from "./diaryState";
 export { authInitializedState, setAuthInitializedAction } from "./authState";
 export {

@@ -8,6 +8,7 @@ export {
   setAuthInitializedAction,
   selectedYMAtom,
   setSelectedYMAction,
+  setCurrentDiaryIdAction,
 } from "./state";
 export {
   PlaneButton,

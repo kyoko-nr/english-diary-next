@@ -1,19 +1,19 @@
 "use client";
 import { FC, memo } from "react";
 import { Card, CardActionArea, CardContent } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { Diary } from "@/shared";
+import { Diary, setCurrentDiaryIdAction } from "@/shared";
 import { FormatDate, WordChip, Label, RowGridContainer } from "@/shared";
+import { useSetAtom } from "jotai";
 
 type Props = {
   diary: Diary;
 };
 
 const ArchiveComponent: FC<Props> = ({ diary }) => {
-  const router = useRouter();
+  const setCurrenDiaryId = useSetAtom(setCurrentDiaryIdAction);
 
   return (
-    <CardActionArea component="a" onClick={() => router.push(`/post/${diary.id}`)}>
+    <CardActionArea component="a" onClick={() => setCurrenDiaryId(diary.id)}>
       <Card sx={{ boxShadow: "none" }}>
         <CardContent sx={{ padding: 2, borderBottom: "1px solid #4a4a4a" }}>
           <FormatDate date={diary.date} formatType={"date"} variant={"caption"} align={"left"} />

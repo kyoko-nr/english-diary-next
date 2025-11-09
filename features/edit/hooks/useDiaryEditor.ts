@@ -1,18 +1,34 @@
 import { loadable } from "jotai/utils";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as yup from "yup";
-import { currentDiaryAtom } from "../../../shared/state/diaryState";
-import { useAtomValue } from "jotai";
+import { currentDiaryAtom } from "@/shared";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useFieldArray, useForm } from "react-hook-form";
-import { WordForm } from "@/shared/types/types";
+import { Word } from "@/shared";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createDiary, currentUserInfoState, saveDiary } from "@/shared";
+import { setCurrentDiaryIdAction } from "@/shared";
 
-const ContentRegExp = /^[a-zA-Z0-9!-/:-@¥\[-`{-~\s]*$/;
-const ContentErrMsg = "Please write 'English' diary!";
+type DiaryForm = {
+  title: string;
+  content: string;
+  words: Word[];
+};
 const schema = yup.object().shape({
   title: yup.string().label("Title").required(),
   content: yup.string().label("Content").required(),
-  words: yup.array(yup.object({ title: yup.string().label("New word").required().trim() })),
+  words: yup
+    .array()
+    .of(
+      yup.object({
+        title: yup.string().label("New word").required().trim(),
+        meanings: yup.array(),
+        synonyms: yup.array(),
+        examples: yup.array(),
+        pos: yup.string().label("pos"),
+      }),
+    )
+    .defined(),
 });
 
 const countWords = (content: string): number => {
@@ -24,12 +40,15 @@ const countWords = (content: string): number => {
 const loadableDiaryAtom = loadable(currentDiaryAtom);
 
 export const useDiaryEditor = () => {
-  const currentDiary = useAtomValue(loadableDiaryAtom);
-  const [counter, setCounter] = useState(0);
-  const data = currentDiary.state === "hasData" ? currentDiary.data : undefined;
-  const diaryData = data ? data : { title: "", content: "", date: new Date(), id: "" };
+  const user = useAtomValue(currentUserInfoState);
 
-  const { control, handleSubmit, watch, setValue } = useForm<WordForm>({
+  const currentDiary = useAtomValue(loadableDiaryAtom);
+  const data = currentDiary.state === "hasData" ? currentDiary.data : undefined;
+  const diaryData = data ? data : { title: "", content: "", date: new Date(), id: undefined };
+
+  const setCurrentDiaryId = useSetAtom(setCurrentDiaryIdAction);
+
+  const { control, handleSubmit, setValue, getValues, reset } = useForm<DiaryForm>({
     // resolver: yupResolver(schema),
     defaultValues: {
       title: diaryData.title,
@@ -37,7 +56,18 @@ export const useDiaryEditor = () => {
       words: [],
     },
   });
-  const { fields, append, remove } = useFieldArray({ name: "words", control });
+  const { fields } = useFieldArray({ name: "words", control });
+
+  // currentDiary が取得できたタイミングでフォームに反映
+  useEffect(() => {
+    if (data) {
+      reset({
+        title: data.title,
+        content: data.content,
+        words: [], // TODO
+      });
+    }
+  }, [data, reset]);
 
   const addWord = () => console.log("add word");
   const deleteWord = () => console.log("delete word");
@@ -46,22 +76,46 @@ export const useDiaryEditor = () => {
     setValue("title", "");
     setValue("content", "");
     setValue("words", []);
-    setCounter(0);
   };
 
-  useEffect(() => {
-    const content = watch("content");
-    setCounter(countWords(content));
-  }, [watch("content")]);
+  const onSubmit = async () => {
+    if (!user) {
+      return;
+    }
+    const values = getValues();
+    if (diaryData.id) {
+      const id = await saveDiary(user.uid, {
+        id: diaryData.id,
+        title: values.title,
+        content: values.content,
+        words: values.words,
+        date: diaryData.date,
+      });
+      setCurrentDiaryId(id);
+    } else {
+      const id = await createDiary(user.uid, {
+        title: values.title,
+        content: values.content,
+        words: values.words,
+      });
+      setCurrentDiaryId(id);
+    }
+  };
+
+  // TODO
+  // useEffect(() => {
+  //   const content = watch("content");
+  //   setCounter(countWords(content));
+  // }, [watch("content")]);
 
   return {
-    counter,
+    counter: countWords(getValues("content")),
     control,
     initFields,
     addWord,
     deleteWord,
     diaryData,
-    onSubmit: () => console.log("submit"),
+    onSubmit: handleSubmit(onSubmit),
     fields,
   };
 };
