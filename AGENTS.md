@@ -25,6 +25,7 @@
 - ESLint: `eslint-config-next`（TS/Next ルール）。修正は最小限・スコープ限定で。
 - コンポーネント: フォルダは小文字、ファイルは PascalCase（例: `shared/components/button/PlaneButton.tsx`）。named export と `memo` を適宜使用。クライアントコンポーネントは先頭に `"use client"`。
 - インポート: 相対パスよりエイリアス（`@/shared`, `@/features`）を優先。
+- any、unknownは禁止
 
 ## テスト指針
 
