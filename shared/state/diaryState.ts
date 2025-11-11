@@ -4,6 +4,13 @@ import { currentUserInfoState } from "./userInfoState";
 import { isSameMonth } from "date-fns";
 import { fetchDiaries } from "../firebase/diaryRepository";
 
+const editVersion = atom(0);
+
+export const incrementEditVersionAction = atom(undefined, (get, set) => {
+  const current = get(editVersion);
+  set(editVersion, current + 1);
+});
+
 const diaryIdBase = atom<string | undefined>(undefined);
 
 export const setCurrentDiaryIdAction = atom(undefined, (get, set, diaryId: string | undefined) =>
@@ -26,6 +33,7 @@ export const allDiariesAtom = atom<Promise<Diary[]>>(async (get) => {
   if (!uid) {
     return [];
   }
+  get(editVersion);
   return await fetchDiaries(uid);
 });
 

@@ -13,7 +13,7 @@ const ArchiveComponent: FC<Props> = ({ diary }) => {
   const router = useRouter();
 
   return (
-    <CardActionArea component="a" onClick={() => router.push(`post/${diary.id}`)}>
+    <CardActionArea component="a" onClick={() => router.push(`/post/${diary.id}`)}>
       <Card sx={{ boxShadow: "none" }}>
         <CardContent sx={{ padding: 2, borderBottom: "1px solid #4a4a4a" }}>
           <FormatDate date={diary.date} formatType={"date"} variant={"caption"} align={"left"} />
