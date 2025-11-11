@@ -26,6 +26,7 @@
     "react-dom": "19.2.0",
     "react-hook-form": "^7.65.0",
     "three": "^0.181.0",
+    "ulid": "^3.0.1",
     "yup": "^1.7.1"
   },
   "devDependencies": {

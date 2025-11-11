@@ -7,8 +7,17 @@ import { useDiaryEditor } from "./hooks/useDiaryEditor";
 import { Box } from "@mui/material";
 
 const DiaryEditorComponent: FC = () => {
-  const { counter, control, initFields, addWord, deleteWord, diaryData, onSubmit, fields } =
-    useDiaryEditor();
+  const {
+    counter,
+    control,
+    initFields,
+    addWord,
+    deleteWord,
+    diaryData,
+    onSubmit,
+    fields,
+    isValid,
+  } = useDiaryEditor();
 
   return (
     <>
@@ -46,7 +55,13 @@ const DiaryEditorComponent: FC = () => {
       </Stack>
       <Stack spacing={2} direction="row" justifyContent="center">
         <OutlineButton label={"clear"} size="mid" color={"inherit"} onClick={initFields} />
-        <ContainedButton color={"primary"} onClick={onSubmit} label={"save"} size="mid" />
+        <ContainedButton
+          color={"primary"}
+          onClick={onSubmit}
+          label={"save"}
+          size="mid"
+          disabled={!isValid}
+        />
       </Stack>
     </>
   );

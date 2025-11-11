@@ -1,28 +1,26 @@
 "use client";
 
 import { Card, CardContent, CardActions, Grid, Box, Stack } from "@mui/material";
-import { TextButton, PosSelect, WordTitleInput, Word } from "@/shared";
+import { TextButton, PosSelect, WordTitleInput, Word, DiaryForm } from "@/shared";
 import { Control } from "react-hook-form";
 import { FC, memo } from "react";
 import { AddibleContent } from "./AddibleContent";
-import { DiaryForm } from "./types/diaryForm";
 
 type Props = {
-  word: Word;
   control: Control<DiaryForm>;
   deleteWord: (wordIndex: number) => void;
   wordIndex: number;
 };
 
-const NewWordComponent: FC<Props> = ({ word, control, deleteWord, wordIndex }) => (
+const NewWordComponent: FC<Props> = ({ control, deleteWord, wordIndex }) => (
   <Card variant="outlined" sx={{ width: "100%" }}>
     <CardContent sx={{ padding: "8px 16px", boxShadow: "none" }}>
       <Grid container spacing={2}>
         <Grid size={8}>
-          <WordTitleInput defaultValue={word.title} control={control} wordIndex={wordIndex} />
+          <WordTitleInput control={control} name={`words.${wordIndex}.title`} />
         </Grid>
         <Grid size={4}>
-          <PosSelect control={control} name={`words.${wordIndex}.pos`} />
+          <PosSelect control={control} name={`words.${wordIndex}.partOfSpeech`} />
         </Grid>
       </Grid>
       <Stack spacing={2}>

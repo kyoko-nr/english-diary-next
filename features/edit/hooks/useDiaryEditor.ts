@@ -1,35 +1,45 @@
 import { loadable } from "jotai/utils";
-import { useEffect } from "react";
+import { useState } from "react";
 import * as yup from "yup";
 import { currentDiaryAtom } from "@/shared";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Word } from "@/shared";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createDiary, currentUserInfoState, saveDiary } from "@/shared";
-import { setCurrentDiaryIdAction } from "@/shared";
 import { useRouter } from "next/navigation";
+import { incrementEditVersionAction } from "@/shared/state/diaryState";
+import { ulid } from "ulid";
+import { DiaryForm } from "@/shared";
 
-type DiaryForm = {
-  title: string;
-  content: string;
-  words: Word[];
-};
+const addibleSchema = yup
+  .array()
+  .of(
+    yup.object().shape({
+      id: yup.string().uuid().required(),
+      value: yup.string().required(),
+    }),
+  )
+  .default([]);
+
+const wordSchema = yup
+  .array()
+  .of(
+    yup.object().shape({
+      title: yup.string().label("New word").required().trim(),
+      partOfSpeech: yup.string().label("Parts of speech"),
+      meanings: addibleSchema,
+      synonyms: addibleSchema,
+      examples: addibleSchema,
+      createdAt: yup.date().required(),
+      id: yup.string().required(),
+    }),
+  )
+  .default([]);
+
 const schema = yup.object().shape({
   title: yup.string().label("Title").required(),
   content: yup.string().label("Content").required(),
-  words: yup
-    .array()
-    .of(
-      yup.object({
-        title: yup.string().label("New word").required().trim(),
-        meanings: yup.array(),
-        synonyms: yup.array(),
-        examples: yup.array(),
-        pos: yup.string().label("pos"),
-      }),
-    )
-    .defined(),
+  words: wordSchema,
 });
 
 const countWords = (content: string): number => {
@@ -40,39 +50,50 @@ const countWords = (content: string): number => {
 
 const loadableDiaryAtom = loadable(currentDiaryAtom);
 
+/**
+ * A hook of diary editor
+ */
 export const useDiaryEditor = () => {
   const router = useRouter();
+
+  const [counter, setCounter] = useState(0);
+
   const user = useAtomValue(currentUserInfoState);
 
+  const incrementEditVersion = useSetAtom(incrementEditVersionAction);
+
   const currentDiary = useAtomValue(loadableDiaryAtom);
-  const data = currentDiary.state === "hasData" ? currentDiary.data : undefined;
-  const diaryData = data ? data : { title: "", content: "", date: new Date(), id: undefined };
+  const diaryData = currentDiary.state === "hasData" ? currentDiary.data : undefined;
 
-  const setCurrentDiaryId = useSetAtom(setCurrentDiaryIdAction);
-
-  const { control, handleSubmit, setValue, getValues, reset } = useForm<DiaryForm>({
-    // resolver: yupResolver(schema),
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    getValues,
+    reset,
+    watch,
+    formState: { isValid },
+  } = useForm<DiaryForm>({
+    resolver: yupResolver(schema),
     defaultValues: {
-      title: diaryData.title,
-      content: diaryData.content,
-      words: [],
+      title: diaryData?.title ?? "",
+      content: diaryData?.content ?? "",
+      words: diaryData?.words ?? [],
     },
   });
-  const { fields } = useFieldArray({ name: "words", control });
+  const { fields, append, remove } = useFieldArray({ name: "words", control });
 
-  // currentDiary が取得できたタイミングでフォームに反映
-  useEffect(() => {
-    if (data) {
-      reset({
-        title: data.title,
-        content: data.content,
-        words: [], // TODO
-      });
-    }
-  }, [data, reset]);
-
-  const addWord = () => console.log("add word");
-  const deleteWord = () => console.log("delete word");
+  const addWord = () =>
+    append({
+      title: "",
+      id: ulid(),
+      partOfSpeech: "",
+      createdAt: new Date(),
+      meanings: [],
+      synonyms: [],
+      examples: [],
+    });
+  const deleteWord = (index: number) => remove(index);
 
   const initFields = () => {
     setValue("title", "");
@@ -85,7 +106,7 @@ export const useDiaryEditor = () => {
       return;
     }
     const values = getValues();
-    if (diaryData.id) {
+    if (diaryData?.id) {
       const id = await saveDiary(user.uid, {
         id: diaryData.id,
         title: values.title,
@@ -93,6 +114,7 @@ export const useDiaryEditor = () => {
         words: values.words,
         date: diaryData.date,
       });
+      incrementEditVersion();
       router.push(`/post/${id}`);
     } else {
       const id = await createDiary(user.uid, {
@@ -100,6 +122,7 @@ export const useDiaryEditor = () => {
         content: values.content,
         words: values.words,
       });
+      incrementEditVersion();
       router.push(`/post/${id}`);
     }
   };
@@ -111,7 +134,7 @@ export const useDiaryEditor = () => {
   // }, [watch("content")]);
 
   return {
-    counter: countWords(getValues("content")),
+    counter,
     control,
     initFields,
     addWord,
@@ -119,5 +142,6 @@ export const useDiaryEditor = () => {
     diaryData,
     onSubmit: handleSubmit(onSubmit),
     fields,
+    isValid,
   };
 };

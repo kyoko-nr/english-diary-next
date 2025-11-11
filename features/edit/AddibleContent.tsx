@@ -1,13 +1,13 @@
 import { Box, Grid } from "@mui/material";
-import { useFieldArray, Control, Path } from "react-hook-form";
-import { TextInputDeletable, Label, AddIconButton, type Feature } from "@/shared";
-import type { WordForm } from "@/shared/types/types";
+import { useFieldArray, Control } from "react-hook-form";
+import { TextInputDeletable, Label, AddIconButton, type Feature, DiaryForm } from "@/shared";
 import { FC, memo } from "react";
+import { ulid } from "ulid";
 
 type Props = {
   feature: Feature;
   fullWidth: boolean;
-  control: Control<WordForm>;
+  control: Control<DiaryForm>;
   wordIndex: number;
 };
 
@@ -17,8 +17,11 @@ const AddibleContentComponent: FC<Props> = ({ feature, fullWidth, control, wordI
     name: `words.${wordIndex}.${feature}`,
   });
 
-  const addFeature = () => append({ value: "" });
+  const addFeature = () => append({ value: "", id: ulid() });
   const deleteFeature = (featureIndex: number) => remove(featureIndex);
+
+  // sort by id
+  const sortedFields = fields.toSorted((a, b) => a.id.localeCompare(b.id));
 
   return (
     <>
@@ -27,7 +30,7 @@ const AddibleContentComponent: FC<Props> = ({ feature, fullWidth, control, wordI
         <AddIconButton feature={feature} onClick={addFeature} />
       </Box>
       <Grid container spacing={1}>
-        {fields.map((field, index) => (
+        {sortedFields.map((field, index) => (
           <TextInputDeletable
             key={field.id}
             name={`words.${wordIndex}.${feature}.${index}.value`}

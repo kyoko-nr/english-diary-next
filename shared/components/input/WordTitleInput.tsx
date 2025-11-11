@@ -1,38 +1,32 @@
 import { TextField } from "@mui/material";
-import { Controller, useController, Control } from "react-hook-form";
-import { DiaryForm } from "../../types/types";
+import { useController, Control, Path } from "react-hook-form";
 import { FC, memo } from "react";
+import { DiaryForm } from "../../types/types";
 
 type Props = {
-  defaultValue: string | undefined;
-  control: Control<WordForm>;
-  wordIndex: number;
+  control: Control<DiaryForm>;
+  name: Path<DiaryForm>;
 };
 
-const WordTitleInputComponent: FC<Props> = (props) => {
-  const { fieldState } = useController({
-    name: `words.${props.wordIndex}.title`,
-    control: props.control,
+const WordTitleInputComponent: FC<Props> = ({ name, control }) => {
+  const {
+    field,
+    fieldState: { invalid, error },
+  } = useController({
+    name,
+    control,
   });
-  const message = fieldState.error ? fieldState.error.message : " ";
 
   return (
-    <Controller
-      name={`words.${props.wordIndex}.title`}
-      control={props.control}
-      defaultValue={props.defaultValue}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          variant={"standard"}
-          helperText={message}
-          fullWidth={true}
-          error={fieldState.invalid}
-          label="New Word"
-          required={true}
-          type={"text"}
-        />
-      )}
+    <TextField
+      {...field}
+      variant={"standard"}
+      helperText={error?.message}
+      fullWidth={true}
+      error={invalid}
+      label="New Word"
+      required={true}
+      type={"text"}
     />
   );
 };

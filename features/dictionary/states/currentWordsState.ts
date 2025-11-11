@@ -21,7 +21,7 @@ const byAlp = (words: Word[], index: AlphabetType | PosType | undefined) => {
 };
 
 const byPos = (words: Word[], index: AlphabetType | PosType | undefined) => {
-  const filtered = words.filter((w) => w.pos === index);
+  const filtered = words.filter((w) => w.partOfSpeech === index);
   return sortByWordProperty(filtered, "title");
 };
 

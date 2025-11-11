@@ -12,21 +12,27 @@ type Props = {
 };
 
 const WordCardComponent: FC<Props> = ({ word, hasDate }) => {
-  const { title, pos, createdAt, meanings, synonyms, examples } = word;
+  const { title, partOfSpeech, createdAt, meanings, synonyms, examples } = word;
   return (
     <Card variant="outlined" sx={{ width: "100%" }}>
       <CardContent>
         <Stack spacing={1} direction="column">
           <RowGridContainer spacing={1} justifyContent="flex-start">
             <Label label={title} variant="h6" align="left" color="primary" />
-            <Pos pos={pos} />
+            <Pos pos={partOfSpeech} />
             {hasDate && (
               <FormatDate date={createdAt} formatType="date" variant="body1" align="left" />
             )}
           </RowGridContainer>
-          {meanings.length > 0 && <WordFeature feature={meanings} featureName="meanings" />}
-          {synonyms.length > 0 && <WordFeatureSynonym feature={synonyms} featureName="synonyms" />}
-          {examples.length > 0 && <WordFeature feature={examples} featureName="examples" />}
+          {meanings && meanings.length > 0 && (
+            <WordFeature feature={meanings} featureName="meanings" />
+          )}
+          {synonyms && synonyms.length > 0 && (
+            <WordFeatureSynonym feature={synonyms} featureName="synonyms" />
+          )}
+          {examples && examples.length > 0 && (
+            <WordFeature feature={examples} featureName="examples" />
+          )}
         </Stack>
       </CardContent>
     </Card>

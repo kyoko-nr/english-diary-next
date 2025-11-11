@@ -3,7 +3,7 @@ import { PosIndexes } from "../../constants/Parts";
 import { FC, memo } from "react";
 
 type Props = {
-  pos: string;
+  pos?: string;
 };
 
 const PosComponent: FC<Props> = ({ pos }) => {

@@ -51,4 +51,4 @@ export { PosIndexes, AlphabetIndexes, SortOptions } from "./constants/Parts";
 export type { AlphabetType, PosType } from "./constants/Parts";
 
 // ---- types
-export type { Diary, Word, Feature, SortKey } from "./types/types";
+export type { Diary, Word, Feature, SortKey, DiaryForm } from "./types/types";

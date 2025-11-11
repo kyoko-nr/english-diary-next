@@ -7,14 +7,17 @@ export type Diary = {
 };
 
 export type Word = {
+  id: string;
   title: string;
   meanings: Addible[];
   synonyms: Addible[];
   examples: Addible[];
-  pos: string;
+  partOfSpeech?: string;
+  createdAt: Date;
 };
 
 export type Addible = {
+  id: string;
   value: string;
 };
 

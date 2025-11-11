@@ -6,6 +6,7 @@ type Props = {
   onClick: () => void;
   size?: "large" | "mid";
   color?: "primary" | "secondary";
+  disabled?: boolean;
 };
 
 const baseStyle = { height: 40, borderRadius: 20, fontSize: 16 };
@@ -15,11 +16,12 @@ const ContainedButtonComponent: FC<Props> = ({
   onClick,
   size = "mid",
   color = "primary",
+  disabled = false,
 }) => {
   const style = size === "large" ? { width: 240, ...baseStyle } : { width: 112, ...baseStyle };
 
   return (
-    <Button onClick={onClick} variant={"contained"} color={color} sx={style}>
+    <Button onClick={onClick} variant={"contained"} color={color} sx={style} disabled={disabled}>
       {label}
     </Button>
   );
