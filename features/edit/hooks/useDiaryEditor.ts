@@ -15,7 +15,7 @@ const addibleSchema = yup
   .array()
   .of(
     yup.object().shape({
-      id: yup.string().uuid().required(),
+      id: yup.string().required(),
       value: yup.string().required(),
     }),
   )
@@ -70,7 +70,6 @@ export const useDiaryEditor = () => {
     handleSubmit,
     setValue,
     getValues,
-    reset,
     watch,
     formState: { isValid },
   } = useForm<DiaryForm>({

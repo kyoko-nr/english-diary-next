@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardActions, Grid, Box, Stack } from "@mui/material";
-import { TextButton, PosSelect, WordTitleInput, Word, DiaryForm } from "@/shared";
+import { TextButton, PosSelect, WordTitleInput, DiaryForm } from "@/shared";
 import { Control } from "react-hook-form";
 import { FC, memo } from "react";
 import { AddibleContent } from "./AddibleContent";

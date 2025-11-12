@@ -9,7 +9,7 @@ type Props = {
 };
 
 const WordFeatureComponent: FC<Props> = ({ feature, featureName }) => (
-  <div>
+  <Stack spacing={1}>
     <Label label={featureName} variant="body1" align="left" capitalize={true} bold={true} />
     <Stack spacing={1}>
       {feature.map((fe, idx) => (
@@ -22,7 +22,7 @@ const WordFeatureComponent: FC<Props> = ({ feature, featureName }) => (
         </Typography>
       ))}
     </Stack>
-  </div>
+  </Stack>
 );
 
 export const WordFeature = memo(WordFeatureComponent);

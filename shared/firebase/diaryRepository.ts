@@ -12,7 +12,7 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "./firebaseClient";
-import type { Diary, Word } from "../types/types";
+import type { Diary } from "../types/types";
 
 const DOC_NAME_USERS = "users";
 const DOC_NAME_DIARIES = "diaries";
@@ -22,8 +22,23 @@ type DiaryDoc = {
   date: Timestamp;
   title: string;
   content: string;
-  words?: Word[];
+  words?: WordDoc[];
   updatedAt: Timestamp;
+};
+
+type AddibleDoc = {
+  id: string;
+  value: string;
+};
+
+type WordDoc = {
+  id: string;
+  title: string;
+  meanings: AddibleDoc[];
+  synonyms: AddibleDoc[];
+  examples: AddibleDoc[];
+  partOfSpeech?: string;
+  createdAt: Timestamp;
 };
 
 export const createDiary = async (
@@ -52,7 +67,10 @@ export const saveDiary = async (uid: string, diary: Diary): Promise<string> => {
       title: diary.title,
       content: diary.content,
       updatedAt: Timestamp.now(),
-      words: diary.words,
+      words: diary.words.map((word) => ({
+        ...word,
+        createdAt: Timestamp.fromDate(word.createdAt),
+      })),
     },
     { merge: true },
   );
@@ -76,7 +94,7 @@ export const fetchDiaries = async (uid: string): Promise<Diary[]> => {
       date: data.date.toDate(),
       title: data.title,
       content: data.content,
-      words: data.words ?? [],
+      words: (data.words ?? []).map((word) => ({ ...word, createdAt: word.createdAt.toDate() })),
     });
   });
   return diaries;
