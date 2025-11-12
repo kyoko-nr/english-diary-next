@@ -1,7 +1,7 @@
 "use client";
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { Label, OutlineButton } from "@/shared";
+import { Label, OutlineButton, MYPAGE_EDIT_PATH, MYPAGE_DELETE_PATH } from "@/shared";
 import Stack from "@mui/material/Stack";
 import { useAtomValue } from "jotai";
 import { currentUserInfoState } from "@/shared";
@@ -33,13 +33,13 @@ const MyPageComponent: FC = () => {
           size={"large"}
           label={"edit"}
           color={"inherit"}
-          onClick={() => router.push("/mypage/edit")}
+          onClick={() => router.push(MYPAGE_EDIT_PATH)}
         />
         <OutlineButton
           size={"large"}
           label={"delete account"}
           color={"error"}
-          onClick={() => router.push("/mypage/delete")}
+          onClick={() => router.push(MYPAGE_DELETE_PATH)}
         />
       </Stack>
     </AppFrame>

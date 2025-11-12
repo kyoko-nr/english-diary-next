@@ -3,7 +3,15 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import { PlaneButton, SimpleLink, TextButton, TextInputStandard } from "@/shared";
+import {
+  PlaneButton,
+  SimpleLink,
+  TextButton,
+  TextInputStandard,
+  EDIT_PATH,
+  SIGNIN_RESET_PATH,
+  SIGNUP_PATH,
+} from "@/shared";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/shared";
 import Alert from "@mui/material/Alert";
@@ -37,7 +45,7 @@ const SigninFormComponent: FC = () => {
     setError(null);
     try {
       await signIn(data.email, data.password);
-      router.push("/edit");
+      router.push(EDIT_PATH);
     } catch (e) {
       // TODO: toastにする
       switch ((e as { code: string }).code) {
@@ -85,14 +93,14 @@ const SigninFormComponent: FC = () => {
           />
           <SimpleLink
             label={"Forgot your password?"}
-            onClick={() => router.push("/signin/reset")}
+            onClick={() => router.push(SIGNIN_RESET_PATH)}
             color={"textPrimary"}
             variant={"body2"}
           />
           <PlaneButton label={"sign in"} onClick={handleSubmit(onSubmit)} />
           <TextButton
             label={"sign up"}
-            onClick={() => router.push("/signup")}
+            onClick={() => router.push(SIGNUP_PATH)}
             size={"large"}
             color={"primary"}
           />

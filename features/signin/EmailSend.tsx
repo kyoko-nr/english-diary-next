@@ -1,7 +1,7 @@
 "use client";
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { BaseFrame, SimpleLink, TextButton, Label } from "@/shared";
+import { BaseFrame, SimpleLink, TextButton, Label, SIGNIN_PATH, SIGNIN_RESET_PATH } from "@/shared";
 import { Box, Stack } from "@mui/material";
 
 const EmailSendComponent: FC = () => {
@@ -15,13 +15,13 @@ const EmailSendComponent: FC = () => {
       <Stack spacing={2}>
         <TextButton
           label={"sign in page"}
-          onClick={() => router.push("/signin")}
+          onClick={() => router.push(SIGNIN_PATH)}
           size={"large"}
           color={"primary"}
         />
         <SimpleLink
           label={"Haven't received an email? Send it again!"}
-          onClick={() => router.push("/signin/reset")}
+          onClick={() => router.push(SIGNIN_RESET_PATH)}
           color={"textPrimary"}
           variant={"body2"}
         />

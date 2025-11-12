@@ -2,7 +2,7 @@
 import { FC, memo } from "react";
 import { Card, CardActionArea, CardContent, Stack } from "@mui/material";
 import { Diary } from "@/shared";
-import { FormatDate, WordChip, Label, RowGridContainer } from "@/shared";
+import { FormatDate, WordChip, Label, RowGridContainer, POST_PATH } from "@/shared";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -13,7 +13,7 @@ const ArchiveComponent: FC<Props> = ({ diary }) => {
   const router = useRouter();
 
   return (
-    <CardActionArea component="a" onClick={() => router.push(`/post/${diary.id}`)}>
+    <CardActionArea component="a" onClick={() => router.push(`${POST_PATH}/${diary.id}`)}>
       <Card sx={{ boxShadow: "none" }}>
         <CardContent sx={{ padding: 2, borderBottom: "1px solid #4a4a4a" }}>
           <Stack spacing={1}>

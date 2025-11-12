@@ -5,6 +5,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { FC, memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Logo } from "../../shared/components/brand";
+import { EDIT_PATH, MYDICTIONARY_PATH, MYPAGE_PATH, ROOT_PATH } from "@/shared";
 
 const AppHeaderComponent: FC = () => {
   const router = useRouter();
@@ -24,7 +25,12 @@ const AppHeaderComponent: FC = () => {
           boxSizing: "border-box",
         }}
       >
-        <Logo variant={"h5"} component={"div"} onClick={() => router.push("/edit")} isLink={true} />
+        <Logo
+          variant={"h5"}
+          component={"div"}
+          onClick={() => router.push(EDIT_PATH)}
+          isLink={true}
+        />
         <Box sx={{ margin: "0 0 0 auto" }}>
           <IconButton className="grey-text" onClick={handleMenu}>
             <AccountCircleIcon fontSize={"large"} />
@@ -44,11 +50,11 @@ const AppHeaderComponent: FC = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={() => router.push("/mypage")}>My Page</MenuItem>
-            <MenuItem onClick={() => router.push("/mydictionary")}>My Dictionary</MenuItem>
+            <MenuItem onClick={() => router.push(MYPAGE_PATH)}>My Page</MenuItem>
+            <MenuItem onClick={() => router.push(MYDICTIONARY_PATH)}>My Dictionary</MenuItem>
             <Divider />
             {/** TODO: ログアウト */}
-            <MenuItem onClick={() => router.push("/")}>Log out</MenuItem>
+            <MenuItem onClick={() => router.push(ROOT_PATH)}>Log out</MenuItem>
           </Menu>
         </Box>
       </Toolbar>

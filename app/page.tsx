@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAtomValue } from "jotai";
-import { authInitializedState, currentUserInfoState } from "@/shared";
+import { authInitializedState, currentUserInfoState, EDIT_PATH, SIGNIN_PATH } from "@/shared";
 
 export default function HomePage() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!isInitialized) return;
-    router.replace(user ? "/edit" : "/signin");
+    router.replace(user ? EDIT_PATH : SIGNIN_PATH);
   }, [isInitialized, user, router]);
 
   return null;

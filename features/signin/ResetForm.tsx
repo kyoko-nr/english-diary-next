@@ -3,7 +3,15 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import { PlaneButton, Label, TextInputStandard, SimpleLink, BaseFrame } from "@/shared";
+import {
+  PlaneButton,
+  Label,
+  TextInputStandard,
+  SimpleLink,
+  BaseFrame,
+  SIGNIN_SENT_PATH,
+  SIGNIN_PATH,
+} from "@/shared";
 import { useRouter } from "next/navigation";
 import { resetPassword } from "@/shared";
 import Alert from "@mui/material/Alert";
@@ -34,7 +42,7 @@ const ResetFormComponent: FC = () => {
     setError(null);
     try {
       await resetPassword(data.email);
-      router.push("/signin/sent");
+      router.push(SIGNIN_SENT_PATH);
     } catch {
       setError("パスワードリセットの送信に失敗しました");
     }
@@ -59,7 +67,7 @@ const ResetFormComponent: FC = () => {
         <PlaneButton label={"send email"} onClick={handleSubmit(onSubmit)} />
         <SimpleLink
           label={"Already have an account?"}
-          onClick={() => router.push("/signin")}
+          onClick={() => router.push(SIGNIN_PATH)}
           color={"textPrimary"}
           variant={"body2"}
         />

@@ -51,4 +51,19 @@ export { PosIndexes, AlphabetIndexes, SortOptions } from "./constants/Parts";
 export type { AlphabetType, PosType } from "./constants/Parts";
 
 // ---- types
-export type { Diary, Word, Feature, SortKey, DiaryForm } from "./types/types";
+export type { Word, Feature, SortKey, DiaryForm, Diary } from "./types/types";
+
+// ---- path
+export {
+  ROOT_PATH,
+  EDIT_PATH,
+  MYPAGE_PATH,
+  MYPAGE_EDIT_PATH,
+  MYPAGE_DELETE_PATH,
+  MYDICTIONARY_PATH,
+  SIGNIN_PATH,
+  SIGNIN_RESET_PATH,
+  SIGNIN_SENT_PATH,
+  SIGNUP_PATH,
+  POST_PATH,
+} from "./constants/Path";

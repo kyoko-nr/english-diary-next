@@ -3,7 +3,14 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { FC, memo } from "react";
-import { PlaneButton, Label, TextInputStandard, SimpleLink, BaseFrame } from "@/shared";
+import {
+  PlaneButton,
+  Label,
+  TextInputStandard,
+  SimpleLink,
+  BaseFrame,
+  SIGNIN_PATH,
+} from "@/shared";
 import { useRouter } from "next/navigation";
 import { signUp, db } from "@/shared";
 import { Timestamp, setDoc, doc } from "firebase/firestore";
@@ -63,7 +70,7 @@ const SignupFormComponent: FC = () => {
         createdAt: ts,
         updatedAt: ts,
       });
-      router.push("/signin");
+      router.push(SIGNIN_PATH);
     } catch (e) {
       // TODO: toastにする
       switch ((e as { code: string }).code) {
@@ -127,7 +134,7 @@ const SignupFormComponent: FC = () => {
           <PlaneButton label={"sign up"} onClick={methods.handleSubmit(onSubmit)} />
           <SimpleLink
             label={"Go to sign in page"}
-            onClick={() => router.push("/signin")}
+            onClick={() => router.push(SIGNIN_PATH)}
             color={"textPrimary"}
             variant={"body2"}
           />

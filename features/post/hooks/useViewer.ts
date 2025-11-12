@@ -1,4 +1,9 @@
-import { currentDiaryAtom, currentUserInfoState, setCurrentDiaryIdAction } from "@/shared";
+import {
+  currentDiaryAtom,
+  currentUserInfoState,
+  setCurrentDiaryIdAction,
+  EDIT_PATH,
+} from "@/shared";
 import { deleteDiary } from "@/shared/firebase/diaryRepository";
 import { useAtomValue, useSetAtom } from "jotai";
 import { loadable } from "jotai/utils";
@@ -24,7 +29,7 @@ export const useViewer = (diaryId: string) => {
     }
     deleteDiary(user.uid, diaryId);
     setCurrentDiaryId(undefined);
-    router.push("/edit");
+    router.push(EDIT_PATH);
   };
 
   useEffect(() => {

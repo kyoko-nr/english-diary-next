@@ -1,9 +1,9 @@
 "use client";
 import { FC, memo } from "react";
 import { useRouter } from "next/navigation";
-import { OutlineButton, Label } from "@/shared";
+import { OutlineButton, Label, SIGNIN_PATH, MYPAGE_PATH } from "@/shared";
 import { deleteAccount } from "@/shared";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { AppFrame } from "../appframe";
 
 const DeleteAccountConfirmComponent: FC = () => {
@@ -13,7 +13,7 @@ const DeleteAccountConfirmComponent: FC = () => {
     try {
       await deleteAccount();
     } finally {
-      router.push("/signin");
+      router.push(SIGNIN_PATH);
     }
   };
 
@@ -33,7 +33,7 @@ const DeleteAccountConfirmComponent: FC = () => {
             size={"mid"}
             label={"cancel"}
             color="inherit"
-            onClick={() => router.push("/mypage")}
+            onClick={() => router.push(MYPAGE_PATH)}
           />
           <OutlineButton size={"mid"} label={"delete"} color="error" onClick={() => onDelete()} />
         </Stack>
