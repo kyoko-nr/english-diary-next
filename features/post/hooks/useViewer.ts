@@ -3,8 +3,8 @@ import {
   currentUserInfoState,
   setCurrentDiaryIdAction,
   EDIT_PATH,
+  deleteDiary,
 } from "@/shared";
-import { deleteDiary } from "@/shared/firebase/diaryRepository";
 import { useAtomValue, useSetAtom } from "jotai";
 import { loadable } from "jotai/utils";
 import { useEffect } from "react";

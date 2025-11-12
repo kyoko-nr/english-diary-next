@@ -13,34 +13,16 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebaseClient";
 import type { Diary } from "../types/types";
+import { DiaryDoc } from "./type";
 
 const DOC_NAME_USERS = "users";
 const DOC_NAME_DIARIES = "diaries";
 
-type DiaryDoc = {
-  id: string;
-  date: Timestamp;
-  title: string;
-  content: string;
-  words?: WordDoc[];
-  updatedAt: Timestamp;
-};
-
-type AddibleDoc = {
-  id: string;
-  value: string;
-};
-
-type WordDoc = {
-  id: string;
-  title: string;
-  meanings: AddibleDoc[];
-  synonyms: AddibleDoc[];
-  examples: AddibleDoc[];
-  partOfSpeech?: string;
-  createdAt: Timestamp;
-};
-
+/**
+ * create diary
+ * @param uid uid
+ * @param diary diary to create
+ */
 export const createDiary = async (
   uid: string,
   diary: Omit<Diary, "id" | "date">,
@@ -57,6 +39,11 @@ export const createDiary = async (
   return diaryRef.id;
 };
 
+/**
+ * Update diary
+ * @param uid uid
+ * @param diary diary to update
+ */
 export const saveDiary = async (uid: string, diary: Diary): Promise<string> => {
   const ref = doc(db, DOC_NAME_USERS, uid, DOC_NAME_DIARIES, diary.id);
   await setDoc(
@@ -77,11 +64,20 @@ export const saveDiary = async (uid: string, diary: Diary): Promise<string> => {
   return diary.id;
 };
 
+/**
+ * Delete diary
+ * @param uid uid
+ * @param diaryId diaryId to delete 
+ */
 export const deleteDiary = async (uid: string, diaryId: string): Promise<void> => {
   const ref = doc(db, DOC_NAME_USERS, uid, DOC_NAME_DIARIES, diaryId);
   await deleteDoc(ref);
 };
 
+/**
+ * Fetch all diaries of user.
+ * @param uid uid
+ */
 export const fetchDiaries = async (uid: string): Promise<Diary[]> => {
   const diaries: Diary[] = [];
   const diaryCollRef = collection(db, DOC_NAME_USERS, uid, DOC_NAME_DIARIES);
@@ -100,7 +96,48 @@ export const fetchDiaries = async (uid: string): Promise<Diary[]> => {
   return diaries;
 };
 
+/**
+ * Fetch user's name
+ * @param uid uid
+ */
 export const fetchUserName = async (uid: string): Promise<string | undefined> => {
   const userDoc = await getDoc(doc(db, DOC_NAME_USERS, uid));
   return (userDoc.data() as { username?: string } | undefined)?.username;
+};
+
+type CreateUserProfileParams = {
+  uid: string;
+  email: string;
+  username: string;
+};
+
+/**
+ * Create user profile.
+ */
+export const createUserProfile = async ({
+  uid,
+  email,
+  username,
+}: CreateUserProfileParams): Promise<void> => {
+  const ts = Timestamp.now();
+  await setDoc(doc(db, DOC_NAME_USERS, uid), {
+    uid,
+    email,
+    username,
+    createdAt: ts,
+    updatedAt: ts,
+  });
+};
+
+/**
+ * Update user name.
+ * @param uid uid
+ * @param username new user name
+ */
+export const updateUserName = async (uid: string, username: string): Promise<void> => {
+  await setDoc(
+    doc(db, DOC_NAME_USERS, uid),
+    { username, updatedAt: Timestamp.now() },
+    { merge: true },
+  );
 };

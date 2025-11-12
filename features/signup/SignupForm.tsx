@@ -12,8 +12,7 @@ import {
   SIGNIN_PATH,
 } from "@/shared";
 import { useRouter } from "next/navigation";
-import { signUp, db } from "@/shared";
-import { Timestamp, setDoc, doc } from "firebase/firestore";
+import { signUp, createUserProfile } from "@/shared";
 import Alert from "@mui/material/Alert";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -62,14 +61,7 @@ const SignupFormComponent: FC = () => {
     try {
       const cred = await signUp(data.email, data.password);
       const user = cred.user;
-      const ts = Timestamp.now();
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        email: data.email,
-        username: data.username,
-        createdAt: ts,
-        updatedAt: ts,
-      });
+      await createUserProfile({ uid: user.uid, email: data.email, username: data.username });
       router.push(SIGNIN_PATH);
     } catch (e) {
       // TODO: toastにする

@@ -14,6 +14,12 @@ const eslintConfig = defineConfig([
       "no-restricted-imports": [
         "error",
         {
+          paths: [
+            {
+              name: "@/shared/firebase/repository",
+              message: "'@/shared/firebase/repository' の直接importは禁止です。'@/shared' からインポートしてください。",
+            },
+          ],
           patterns: [
             {
               group: ["@/shared/*", "@/features/*"],

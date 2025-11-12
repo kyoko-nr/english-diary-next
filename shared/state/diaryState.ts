@@ -2,7 +2,7 @@ import type { Diary } from "../types/types";
 import { atom } from "jotai";
 import { currentUserInfoState } from "./userInfoState";
 import { isSameMonth } from "date-fns";
-import { fetchDiaries } from "../firebase/diaryRepository";
+import { fetchDiaries } from "../firebase/repository";
 
 const editVersion = atom(0);
 

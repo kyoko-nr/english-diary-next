@@ -1,4 +1,11 @@
-export { saveDiary, createDiary, fetchUserName } from "./diaryRepository";
+export {
+  saveDiary,
+  createDiary,
+  deleteDiary,
+  fetchUserName,
+  createUserProfile,
+  updateUserName,
+} from "./repository";
 export {
   signIn,
   signUp,

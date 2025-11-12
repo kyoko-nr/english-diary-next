@@ -35,7 +35,10 @@ export { RequireAuth } from "./auth/RequireAuth";
 export {
   saveDiary,
   createDiary,
+  deleteDiary,
   fetchUserName,
+  createUserProfile,
+  updateUserName,
   signIn,
   signUp,
   onAuthChange,
